@@ -2,6 +2,11 @@ const express = require('express');
 const dotenv = require('dotenv');
 const purchaseRoute = require('./routes/purchase');
 
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://9throbotics.github.io/Reach-Frontend/', // Replace with your frontend's URL
+  methods: 'GET,POST', // Specify
+
 dotenv.config();
 
 const app = express();
