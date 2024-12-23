@@ -20,7 +20,9 @@ app.post('/buyTokens', async (req, res) => {
     if (!recipient || !amount) {
         return res.status(400).send('Missing recipient or amount');
     }
-
+  app.get('/endpoint', (req, res) => {
+  res.json({ message: "Endpoint is working!" });
+});
     try {
         // Add logic to interact with your smart contract here
         res.status(200).send(`Bought ${amount} tokens for ${recipient}`);
