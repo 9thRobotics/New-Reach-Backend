@@ -8,6 +8,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+console.log(`Server is starting...`);
+
 // Debug: Log environment variables
 console.log('Environment Variables:', {
   PRIVACY_KEY: process.env.PRIVACY_KEY,
