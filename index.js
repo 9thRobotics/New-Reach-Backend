@@ -4,6 +4,9 @@ const cors = require("cors");
 
 dotenv.config();
 
+const endpointRoute = require('./src/routes/endpoint'); // Adjust path if necessary
+app.use(endpointRoute);
+
 const app = express();
 
 // Middleware
