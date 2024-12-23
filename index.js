@@ -4,9 +4,6 @@ const cors = require("cors");
 
 dotenv.config();
 
-const endpointRoute = require('./src/routes/endpoint'); // Adjust path if necessary
-app.use(endpointRoute);
-
 const app = express();
 
 // Middleware
@@ -18,39 +15,24 @@ app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
-// Endpoint Route
+// /endpoint Route
 app.get("/endpoint", (req, res) => {
-  res.json({ message: "Endpoint is working!" });
+  res.json({ message: "Endpoint is active!" });
 });
 
-// Buy Tokens Route
-app.post("/buyTokens", (req, res) => {
-  const { recipient, amount } = req.body;
-
-  // Input Validation
-  if (!recipient || !amount) {
-    return res.status(400).json({ error: "Missing recipient or amount" });
-  }
-
-  // Simulated Smart Contract Interaction (replace with actual logic)
-  try {
-    // Example: Interact with your blockchain or smart contract here
-    res.status(200).json({
-      message: `Bought ${amount} tokens for ${recipient}`,
-    });
-  } catch (error) {
-    console.error("Error processing transaction:", error);
-    res.status(500).json({ error: "Error processing transaction" });
-  }
+// Debugging and Logging
+app.use((req, res, next) => {
+  console.log(`Received request: ${req.method} ${req.url}`);
+  next();
 });
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error("Error:", err.message);
   res.status(500).json({ error: "Something went wrong!" });
 });
 
-// Server Initialization
+// Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
