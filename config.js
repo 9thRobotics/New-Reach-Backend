@@ -12,4 +12,9 @@ const abi = [ /* Your Contract ABI here */ ];
 
 const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, wallet);
 
+require('dotenv').config();
+
+const apiKey = process.env.API_KEY;
+console.log("API Key:", apiKey);
+
 module.exports = { contract };
