@@ -22,7 +22,15 @@ app.use(express.json());
 app.use('/api/purchase', purchaseRoute);
 
 // Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
-});
+const API_BASE_URL = " https://reach-token-heroku-app-f5aa74057eec.herokuapp.com/
+";
+
+fetch(`${API_BASE_URL}/endpoint`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error("Error:", error));
