@@ -1,0 +1,4 @@
+// Add this to your index.js file
+app.get('/endpoint', (req, res) => {
+  res.json({ message: "Endpoint is active!" });
+});
