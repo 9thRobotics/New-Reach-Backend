@@ -17,7 +17,24 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
 
+dotenv.config();
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello, world!");
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
 
 // Middleware
 app.use(express.json()); // Parse incoming JSON requests
