@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "description": "Backend for Reach application",
   "main": "index.js",
-  
   "scripts": {
-  "dev": "nodemon app.js",
-  "start": "node app.js"
-}
-
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "dependencies": {
     "express": "^4.18.2",
@@ -22,7 +19,6 @@
     "node": ">=14.0.0"
   },
   "keywords": [],
-  "author": "9th Dimension Robotics Company ",
+  "author": "9th Dimension Robotics Company",
   "license": "MIT"
 }
-
