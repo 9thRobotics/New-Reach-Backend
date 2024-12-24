@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-// Define the `/endpoint` route
-router.get('/endpoint', (req, res) => {
-  res.json({ message: "Endpoint is active!" });
+// Example GET route
+router.get('/', (req, res) => {
+  res.json({ message: 'This is the endpoint route!' });
+});
+
+// Example POST route
+router.post('/', (req, res) => {
+  const { data } = req.body;
+  res.json({ message: 'Data received successfully!', receivedData: data });
 });
 
 module.exports = router;
