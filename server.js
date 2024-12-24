@@ -9,6 +9,8 @@ const app = express();
 // Configure environment variables
 dotenv.config();
 
+"dev": "nodemon server.js"
+
 // Enable CORS for specified origin
 app.use(cors({
   origin: 'https://9throbotics.github.io/Reach-Frontend/', // Replace with your frontend's URL
