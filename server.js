@@ -1,41 +1,37 @@
+// Import required modules
 const express = require('express');
-const dotenv = require('dotenv');
 const cors = require('cors');
-const purchaseRoute = require('./routes/purchase');
+const dotenv = require('dotenv');
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Initialize Express app
 const app = express();
 
-// Configure environment variables
-dotenv.config();
+// Middleware
+app.use(cors());
+app.use(express.json()); // Parse JSON requests
 
-"dev": "nodemon server.js"
-
-// Enable CORS for specified origin
-app.use(cors({
-  origin: 'https://9throbotics.github.io/Reach-Frontend/', // Replace with your frontend's URL
-  methods: ['GET', 'POST'], // Specify allowed methods
-}));
-
-// Middleware to parse JSON requests
-app.use(express.json());
-
-// Routes
-app.use('/api/purchase', purchaseRoute);
-
-// Start the server
-const API_BASE_URL = " https://reach-token-heroku-app-f5aa74057eec.herokuapp.com/";
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Debug: Log environment variables (optional, for testing purposes)
+console.log('Environment Variables:', {
+  PORT: process.env.PORT,
+  SECRET_KEY: process.env.SECRET_KEY, // Example environment variable
+  WALLET_ADDRESS: process.env.WALLET_ADDRESS,
 });
 
-fetch(`${API_BASE_URL}/endpoint`, {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-})
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error("Error:", error));
+// Default route
+app.get('/', (req, res) => {
+  res.send('Reach Backend is running!');
+});
+
+// Example endpoint for testing
+app.get('/test', (req, res) => {
+  res.json({ message: 'This is a test endpoint.' });
+});
+
+// Start the server
+const PORT = process.env.PORT || 5000; // Default to port 5000 if not defined
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
