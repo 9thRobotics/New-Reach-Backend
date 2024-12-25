@@ -6,11 +6,8 @@ const bcrypt = require('bcrypt');
 const app = express();
 app.use(express.json());
 
-// Database connection
-mongoose.connect('mongodb://localhost:27017/reach-backend', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => console.log('MongoDB connected'))
+mongoose.connect('mongodb://localhost:27017/reach-backend')
+  .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Authentication route
