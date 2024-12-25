@@ -2,11 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/reach-backend')
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
@@ -18,7 +19,7 @@ app.post('/api/auth/login', async (req, res) => {
     const storedPassword = await bcrypt.hash('password123', 10);
 
     if (username === 'testuser' && await bcrypt.compare(password, storedPassword)) {
-        const token = jwt.sign({ username }, 'your_jwt_secret', { expiresIn: '1h' });
+        const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.status(200).json({ token });
     } else {
         res.status(401).send('Invalid credentials');
