@@ -4,6 +4,10 @@
   "description": "Backend for Reach application",
   "main": "index.js",
   "scripts": {
+    "scripts": {
+    "start": "node server.js"
+}
+
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
