@@ -1,4 +1,3 @@
-.env
 # Node.js dependencies
 node_modules/
 npm-debug.log*
@@ -12,23 +11,11 @@ logs/
 # Environment variables
 .env
 
-# Node.js dependencies
-node_modules/
-
-# Logs
-logs/
-*.log
-
-# Environment variables
-.env
-
 # Build files
 dist/
 build/
 
-
 # Build artifacts
-dist/
 coverage/
 
 # IDE/Editor files
@@ -44,15 +31,3 @@ desktop.ini
 # Ignore system files
 AppData/
 *.jtx
-*.log
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Node.js dependencies
-node_modules/
-
-# Build files
-dist/
-build/
-
