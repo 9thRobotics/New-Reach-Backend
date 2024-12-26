@@ -2,7 +2,7 @@
   "name": "reach-backend",
   "version": "1.0.0",
   "description": "Backend for Reach application",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "scripts": {
     "start": "node server.js"
