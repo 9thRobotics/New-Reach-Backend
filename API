@@ -1,15 +1,51 @@
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const express = require('express');
+const app = express();
 
 const swaggerOptions = {
     swaggerDefinition: {
+        openapi: '3.0.0', // Specifies the OpenAPI version
         info: {
             title: 'API Documentation',
             version: '1.0.0',
+            description: 'API documentation for the Reach Backend project',
+            contact: {
+                name: '9th Dimension Robotics Company',
+                url: 'https://www.example.com',
+                email: 'info@example.com'
+            },
+            license: {
+                name: 'MIT',
+                url: 'https://opensource.org/licenses/MIT'
+            }
         },
+        servers: [
+            {
+                url: 'http://localhost:3000',
+                description: 'Local server'
+            },
+            {
+                url: 'https://reach-backend.herokuapp.com',
+                description: 'Production server'
+            }
+        ]
     },
     apis: ['server.js'], // Files containing Swagger annotations
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// Error handling for the Swagger setup
+app.use((err, req, res, next) => {
+    console.error('Swagger setup error:', err);
+    res.status(500).send('Internal Server Error');
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+module.exports = app;
