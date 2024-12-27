@@ -31,3 +31,33 @@ desktop.ini
 # Ignore system files
 AppData/
 *.jtx
+
+# Ignore node modules and build files
+node_modules/
+*.log
+
+# Ignore system files and directories
+.DS_Store
+Thumbs.db
+.AppData/
+.Cookies/
+Desktop/
+Documents/
+My\ Documents/
+Local\ Settings/
+Recent/
+SendTo/
+Start\ Menu/
+Templates/
+
+# Ignore temporary and user files
+*.ini
+*.backup
+*.xml
+*.stl
+*.7z
+*.dxf
+
+# Ignore version control files
+.git-credentials
+.gitignore_global
