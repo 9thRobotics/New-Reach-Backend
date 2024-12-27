@@ -11,6 +11,9 @@ logs/
 # Environment variables
 .env
 
+# Ignore Windows NTUSER files
+NTUSER.DAT*
+
 # Build files
 dist/
 build/
