@@ -384,3 +384,51 @@ git push --set-upstream origin main
 git config --global push.autoSetupRemote always
 git status
 git log
+npm install
+git add package-lock.json
+git commit -m "Update package-lock.json"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+npm install
+npm install
+git add package-lock.json
+git commit -m "Update package-lock.json"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+heroku local web
+git add package.json
+git commit -m "Fix JSON syntax error in package.json"
+git push origin main
+node -e "console.log(JSON.parse(require('fs').readFileSync('./package.json')))"
+git stash
+git pull origin main --rebase
+git add package.json
+git rebase --continue
+git push origin main
+git push origin main --force
+heroku logs --tail --app new-reach-backend
+git fetch origin
+git diff origin/main
+git add package.json
+git commit -m "Fix JSON syntax error in package.json"
+git push origin main
+git config --global push.autoSetupRemote true
+git config --global --get push.autoSetupRemote
+git push origin main
+heroku local web
+git push heroku main
+heroku logs --tail --app new-reach-backend
+git add package.json
+git commit -m "Add dotenv dependency"
+git push origin main
+git pull origin main --rebase
+git add <conflicting-file>
+git pull origin main --rebase
+git add package.json
+git rebase --continue
+git push origin main --force-with-lease
+git add package.json
+git commit -m "Add dotenv dependency"
+git push origin main
+git fetch origin
+git diff origin/main
