@@ -1,6 +1,7 @@
 {
   "name": "new-reach-backend",
   "version": "1.0.0",
+<<<<<<< HEAD
   "description": "Backend for the New Reach Project",
   "main": "index.js",
   "scripts": {
@@ -15,4 +16,18 @@
   "keywords": [],
   "author": "9th Dimension Robotics Company",
   "license": "MIT"
+=======
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+>>>>>>> c58cd3e31869b0052f78ddb648acc2c67c687570
 }
