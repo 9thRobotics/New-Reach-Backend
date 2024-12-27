@@ -64,3 +64,55 @@ Templates/
 # Ignore version control files
 .git-credentials
 .gitignore_global
+# Ignore system directories and files
+Application Data/
+Cookies/
+Local Settings/
+My Documents/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Start Menu/
+Templates/
+AppData/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Links/
+Music/
+OneDrive/
+Pictures/
+Saved Games/
+Searches/
+Videos/
+
+# Ignore NTUSER system files
+NTUSER.DAT*
+ntuser.*
+
+# Ignore IDE and development tool files
+.vscode/
+.windows-build-tools/
+.librarymanager/
+
+# Ignore dependency directories
+node_modules/
+bin/
+
+# Ignore user-specific directories
+.android/
+.chocolatey/
+.dbus-keyrings/
+.dotnet/
+.ssh/
+3D Objects/
+RevoScanData/
+vmlogs/
+
+# Ignore temporary and generated files
+*.log
+*.regtrans-ms
+*.blf
+
