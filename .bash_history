@@ -366,3 +366,21 @@ git push --set-upstream origin main
 git config --global push.autoSetupRemote always
 git status
 git log
+git pull origin main
+git push --set-upstream origin main
+git status
+git add .
+git commit -m "Update package.json to use server.js as the entry point and address modified/untracked content"
+git push
+git config --global push.autoSetupRemote true
+git push --set-upstream origin main
+git push heroku main
+heroku logs --tail --app new-reach-backend
+git add package.json
+git commit -m "Update package.json to use server.js as the entry point"
+git add new-reach-backend reach-backend reach-frontend
+git commit -m "Update project files"
+git push --set-upstream origin main
+git config --global push.autoSetupRemote always
+git status
+git log
