@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "phill",
   "version": "1.0.0",
   "main": "index.js",
@@ -18,4 +19,22 @@
   },
   "homepage": "https://github.com/9thRobotics/New-Reach-Backend#readme",
   "description": ""
+=======
+  "name": "new-reach-backend",
+  "version": "1.0.0",
+  "description": "Backend for the New Reach Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=16.x"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "keywords": [],
+  "author": "9th Dimension Robotics Company",
+  "license": "MIT"
+>>>>>>> eb11c372f89f6a127163107d2b510f768d2d54de
 }
