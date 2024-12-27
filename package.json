@@ -2,10 +2,9 @@
   "name": "new-reach-backend",
   "version": "1.0.0",
   "description": "Backend for the New Reach Project",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "engines": {
     "node": ">=16.x"
