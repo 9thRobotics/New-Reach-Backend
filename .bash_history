@@ -157,3 +157,138 @@ npm start
 ls
 npm install
 npm start
+ls
+npm install
+npm start
+ls
+npm run
+npm start
+npm init -y
+git add .
+git commit -m "Update project files and fix deployment issues"
+git push heroku main
+git remote -v
+heroku git:remote -a new-reach-backend
+heroku config:set PORT=3000
+heroku config
+heroku logs --tail --app new-reach-backend
+heroku logs --tail --app new-reach-backend
+git add .
+git commit -m "Fix backend structure and configurations"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+npm install
+git add package-lock.json
+git commit -m "Add dependencies"
+git push heroku main
+heroku config
+npm start
+npm start
+npm install
+npm start
+sudo systemctl stop mongod
+sudo systemctl start mongod
+sudo systemctl status mongod
+mongo
+node server.js
+sudo journalctl -u mongod
+mongo
+show dbs
+use ReachDatabase
+show collections
+git add .
+git commit -m "Fix MongoDB configuration"
+git push heroku main
+OP-LF2PKB7 MINGW64 ~ (main)
+$
+heroku logs --tail --app new-reach-backend
+heroku config:set PORT=3000 MONGO_URI=<your_mongo_connection_string> --app new-reach-backend
+node server.js
+"main": "server.js"
+"main": "server.js"
+"main": "server.js"
+git add package.json
+git commit -m "Update package.json main entry point"
+git config --global user.name "9thRobotics"
+git config --global user.email "phillipdfilkins@hotmail.com"
+heroku config:set PORT=3000 MONGO_URI=<your_mongo_connection_string> --app new-reach-backend
+heroku config --app new-reach-backend
+node server.js
+git add .
+git commit -m "Fix server crash issues"
+git push heroku main
+git pull origin main
+git push origin main
+heroku config:set PORT=3000 MONGO_URI=<your_mongo_connection_string> --app new-reach-backend
+heroku config --app new-reach-backend
+node server.js
+git add .
+git commit -m "Fix server crash issues"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+git add package.json
+git commit -m "Update package.json to use index.js as entry point"
+git pull origin main
+git push origin main
+git add package.json
+git commit -m "Update package.json to use index.js as entry point"
+git pull origin main
+git push origin main
+git status
+git add .
+git commit -m "Add untracked files"
+git pull origin main --allow-unrelated-histories
+git push origin main
+git pull origin main --allow-unrelated-histories
+git status
+git add .
+git commit -m "Add untracked files"
+git pull origin main --allow-unrelated-histories
+git push heroku main
+ill@DESKTOP-LF2PKB7 MINGW64 ~ (main)
+$
+heroku logs --tail --app new-reach-backend
+npm install
+git add package.json
+git commit -m "Resolve merge conflict in package.json"
+git pull origin main
+git add package.json
+git commit -m "Resolve merge conflict in package.json"
+git pull origin main
+git push origin main
+npm install
+npm install
+git add package.json
+git commit -m "Fix package.json conflicts"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+npm install
+git add package.json
+git commit -m "Fix package.json conflicts"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+git add package.json
+git commit -m "Resolve merge conflict in package.json"
+git pull origin main
+git push origin main
+npm install
+git push heroku main
+git pull heroku main
+git push heroku main
+git pull heroku main
+git push heroku main
+git pull heroku main --allow-unrelated-histories
+git pull heroku main --allow-unrelated-histories
+git pull heroku main --allow-unrelated-histories
+phill@DESKTOP-LF2PKB7 MINGW64 ~ (main)
+git status
+git add package-lock.json
+git commit -m "Save local changes to package-lock.json"
+git pull heroku main --allow-unrelated-histories
+git stash
+git pull heroku main --allow-unrelated-histories
+git stash apply
+git checkout -- package-lock.json
+git pull heroku main --allow-unrelated-histories
+git push heroku main
+git diff
