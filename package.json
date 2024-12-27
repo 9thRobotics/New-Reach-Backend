@@ -9,10 +9,10 @@
   },
   "engines": {
     "node": ">=16.x"
-  },
-  "dependencies": {
-    "express": "^4.21.2"
-  },
+ "dependencies": {
+  "express": "^4.21.2",
+  "dotenv": "^10.0.0"
+}
   "keywords": [],
   "author": "9th Dimension Robotics Company",
   "license": "MIT"
