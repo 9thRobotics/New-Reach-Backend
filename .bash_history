@@ -292,3 +292,77 @@ git checkout -- package-lock.json
 git pull heroku main --allow-unrelated-histories
 git push heroku main
 git diff
+git add package.json Procfile
+git commit -m "Resolve merge conflicts in package.json and Procfile"
+git pull heroku main --allow-unrelated-histories
+git push heroku main
+git status
+git add new-reach-backend
+git commit -m "Resolve merge conflicts"
+git pull heroku main --allow-unrelated-histories
+git pull heroku main --allow-unrelated-histories
+git push heroku main
+rm package-lock.json
+npm install
+git add package-lock.json
+git commit -m "Regenerate package-lock.json"
+git log -p new-reach-backend
+git add .
+git status
+git add package-lock.json
+git commit -m "Resolve merge conflicts in package-lock.json"
+git pull heroku main --allow-unrelated-histories
+git push heroku main
+heroku logs --tail --app new-reach-backend
+git status
+git add package-lock.json
+git commit -m "Save local changes to package-lock.json"
+git pull heroku main --allow-unrelated-histories
+git stash
+git pull heroku main --allow-unrelated-histories
+git stash apply
+git pull heroku main --allow-unrelated-histories
+git stash apply
+git checkout -- package-lock.json
+npm install
+npm install
+git status
+[200~git add <file>
+git add new-reach-backend
+git commit -m "Resolve merge conflicts"
+git pull heroku main --allow-unrelated-histories
+git push heroku main
+rm package-lock.json
+npm install
+git add package-lock.json
+git commit -m "Regenerate package-lock.json"
+git add package-lock.json
+git add new-reach-backend
+git add .
+git status
+git add package-lock.json
+git add package-lock.json
+git add new-reach-backend
+git add .
+git status
+git status
+git add .
+git commit -m "Resolve merge conflicts and update files"
+git push heroku main
+git add new-reach-backend
+git add reach-backend
+git add reach-frontend
+git commit -m "Resolve merge conflicts and update specific files"
+git push heroku main
+git status
+git add package.json
+git commit -m "Update package.json to use server.js as the entry point"
+git push
+git add package.json
+git commit -m "Update package.json to use server.js as the entry point"
+git add new-reach-backend reach-backend reach-frontend
+git commit -m "Update project files"
+git push --set-upstream origin main
+git config --global push.autoSetupRemote always
+git status
+git log

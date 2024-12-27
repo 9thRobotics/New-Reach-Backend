@@ -3,3 +3,5 @@
 [user]
 	name = 9thRobotics
 	email = phillipdfilkins@hotmail.com
+[push]
+	autoSetupRemote = always

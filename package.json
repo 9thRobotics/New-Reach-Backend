@@ -3,9 +3,9 @@
   "version": "1.0.0",
 <<<<<<< HEAD
   "description": "Backend for the New Reach Project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "engines": {
     "node": ">=16.x"
