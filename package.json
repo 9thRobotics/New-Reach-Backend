@@ -1,25 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "phill",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/9thRobotics/New-Reach-Backend.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/9thRobotics/New-Reach-Backend/issues"
-  },
-  "homepage": "https://github.com/9thRobotics/New-Reach-Backend#readme",
-  "description": ""
-=======
   "name": "new-reach-backend",
   "version": "1.0.0",
   "description": "Backend for the New Reach Project",
@@ -36,5 +15,4 @@
   "keywords": [],
   "author": "9th Dimension Robotics Company",
   "license": "MIT"
->>>>>>> eb11c372f89f6a127163107d2b510f768d2d54de
 }
