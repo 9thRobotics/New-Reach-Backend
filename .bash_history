@@ -432,3 +432,63 @@ git commit -m "Add dotenv dependency"
 git push origin main
 git fetch origin
 git diff origin/main
+git add package.json
+git commit -m "Fix JSON syntax error in package.json and add dotenv dependency"
+git push origin main
+git pull origin main --rebase
+git push origin main
+git add .
+git commit -m "Commit your changes before pulling"
+git pull origin main --rebase
+git push origin main
+git push heroku main
+git pull origin main --rebase
+git add package.json
+git rebase --continue
+git push origin main --force-with-lease
+heroku logs --tail --app new-reach-backend
+git add package.json
+git commit -m "Fix JSON syntax error in package.json"
+git commit -m "Fix JSON syntax error in package.json"
+git push origin main
+git push heroku main
+phill@DESKTOP-LF2PKB7 MINGW64 ~ (main)
+$ git push heroku main
+Enumerating objects: 14, done.
+Counting objects: 100% (14/14), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (10/10), 2.59 KiB | 1.29 MiB/s, done.
+Total 10 (delta 7), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Updated 726 paths from 0b0aff4
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Building on the Heroku-24 stack
+remote: -----> Using buildpack: heroku/nodejs
+remote: -----> Node.js app detected
+remote: jq: parse error: Expected separator between values at line 12, column 1
+remote:  !     Unable to parse package.json
+remote:
+remote:
+remote: -----> Build failed
+remote:
+remote: We're sorry this build is failing! You can troubleshoot common issues here:
+remote: https://devcenter.heroku.com/articles/troubleshooting-node-deploys
+remote:
+remote: If you're stuck, please submit a ticket so we can help:
+remote: https://help.heroku.com/
+remote:
+remote: Love,
+remote: Heroku
+remote:
+remote:  !     Push rejected, failed to compile Node.js app.
+remote:
+remote:  !     Push failed
+remote: Verifying deploy...
+remote:
+remote: !       Push rejected to new-reach-backend.
+remote:
+To https://git.heroku.com/new-reach-backend.git
+ ! [remote rejected] main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://git.heroku.com/new-reach-backend.git
