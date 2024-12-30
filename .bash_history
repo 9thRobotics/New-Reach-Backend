@@ -1,51 +1,3 @@
-git push heroku main
-heroku logs --tail --app new-reach-backend
-npm run build
-npm run deploy
-npm install @openzeppelin/contracts
-ReentrancyGuard
-npm install @openzeppelin/contracts
-npm install @openzeppelin/contracts
-npm install @openzeppelin/contracts
-npm install @openzeppelin/contracts
-git clone https://github.com/9thRobotics/Reach-Backend.git
-git clone https://github.com/9thRobotics/new-reach-backend.git
-git clone https://github.com/9thRobotics/Reach-Backend.git
-git clone https://github.com/9thRobotics/new-reach-backend.git
-git add .
-git commit -m "Consolidated code from Reach-Backend and new-reach-backend"
-git add .
-git commit -m "Consolidated code from Reach-Backend and new-reach-backend"
-git push origin main
-git pull origin main
-git push origin main
-git pull origin main --allow-unrelated-histories
-git add .
-git commit -m "Merge remote-tracking branch 'origin/main' into main"
-git add .
-git commit -m "Merge remote-tracking branch 'origin/main' into main"
-git push origin main
-git add package-lock.json
-git add -A
-git commit -m "Merge remote-tracking branch 'origin/main' into main"
-git add .gitignore
-git commit -m "Add .gitignore to exclude unnecessary files"
-git push origin main
-git status
-git reset <file>
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-    modified:   package-lock.json
-git reset package-lock.json
-git reset
-git status
-git add .gitignore
-git commit -m "Add .gitignore to exclude unnecessary files"
-git add .gitignore
-git commit -m "Add .gitignore to exclude unnecessary files"
-git clean -n
-git clean -f
-git add .gitignore
 git commit -m "Add NTUSER files to .gitignore"
 git rm --cached "NTUSER.DAT{2ad838bc-efea-11ee-a54d-000d3a94eaa1}.TM.blf"
 git clean -f -X
@@ -492,3 +444,57 @@ remote:
 To https://git.heroku.com/new-reach-backend.git
  ! [remote rejected] main -> main (pre-receive hook declined)
 error: failed to push some refs to 'https://git.heroku.com/new-reach-backend.git
+npm start
+npm install
+npm start
+git add package.json
+git commit -m "Fix JSON syntax error in package.json"
+git push origin main
+git push heroku main
+cat package.json | jq
+npm install
+git add package.json
+git commit -m "Fix package.json syntax issue"
+git push origin main
+git push heroku main
+heroku logs --tail --app new-reach-backend
+npm install dotenv
+git add package.json package-lock.json
+git commit -m "Add dotenv to dependencies"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+heroku restart --app new-reach-backend
+heroku config:set KEY=VALUE --app new-reach-backend
+heroku logs --tail --app new-reach-backend
+npm install dotenv --save
+git add package.json package-lock.json
+git commit -m "Add dotenv to dependencies"
+git push heroku main
+heroku restart --app new-reach-backend
+heroku logs --tail --app new-reach-backend
+heroku config:set KEY=VALUE --app new-reach-backend
+npm install dotenv --save
+git add package.json package-lock.json
+git commit -m "Add dotenv to dependencies"
+git push heroku main
+heroku restart --app new-reach-backend
+heroku logs --tail --app new-reach-backend
+npm install dotenv --save
+rm -rf node_modules package-lock.json
+npm install
+git add .
+git commit -m "Clean install of dependencies"
+git push heroku main
+rm -rf node_modules package-lock.json
+npm install
+rm -rf node_modules package-lock.json
+npm install
+rm -rf node_modules package-lock.json
+npm install
+rm -rf node_modules package-lock.json
+npm install
+git add package.json package-lock.json
+git commit -m "Fix package.json syntax and reinstall dependencies"
+git push heroku main
+rm -rf node_modules package-lock.json
+npm install
