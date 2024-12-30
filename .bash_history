@@ -1,397 +1,3 @@
-git commit -m "Add NTUSER files to .gitignore"
-git rm --cached "NTUSER.DAT{2ad838bc-efea-11ee-a54d-000d3a94eaa1}.TM.blf"
-git clean -f -X
-git clean -f --exclude="NTUSER.*"
-git status
-git add .gitignore
-git commit -m "Add .gitignore to exclude unnecessary files"
-git clean -fdX
-git status
-git add <file>
-git commit -m "Add necessary changes"
-git push origin main
-git pull origin main --allow-unrelated-histories
-git add .
-git commit -m "Merge remote-tracking branch 'origin/main' into main"
-git push origin main
-cd path/to/your/repo
-git pull origin main
-git add .
-git commit -m "Resolved merge conflicts"
-git config --global user.email "phillipdfilkins@hotmail.com"
-git config --global user.name "9thRobotices"
-git add .
-git commit -m "Resolved merge conflicts"
-git push origin main
-cd path/to/your/repo
-cd ~/Documents/Reach-Backend
-git pull origin main
-git add <file>
-git commit -m "Resolve merge conflicts"
-git push origin main
-git pull origin main
-git add .
-git commit -m "Resolved merge conflicts"
-git push origin main
-git pull origin main
-git add .gitignore
-git commit -m "Resolved merge conflicts"
-git push origin main
-git add .gitignore
-git commit -m "Resolved merge conflicts"
-git push origin main
-git remote set-url origin https://github.com/9thRobotics/New-Reach-Backend.git
-git pull origin main
-git add package.json
-git commit -m "Resolved merge conflicts"
-git push origin main
-git remote set-url origin https://github.com/9thRobotics/New-Reach-Backend.git
-git pull origin main
-git add new-reach-backend
- git rm --cached new-reach-backend
-git remote set-url origin https://github.com/9thRobotics/New-Reach-Backend.git
-git pull origin main
-git pull origin main --allow-unrelated-histories
-git reset --hard HEAD
-git clean -fd
-heroku apps:destroy --app reach-backend
-git remote set-url origin https://github.com/9thRobotics/New-Reach-Backend.git
-git remote -v
-grep -rl "Reach-Backend" . | xargs sed -i 's/Reach-Backend/New-Reach-Backend/g'
-git remote -v
-heroku apps:destroy --app reach-backend
-git remote set-url origin https://github.com/9thRobotics/New-Reach-Backend.git
-git remote -v
-git add .
-git commit -m "Update references to New-Reach-Backend"
-git push origin main
-heroku git:remote --app new-reach-backend
-git push heroku main
-heroku config:set VITE_BACKEND_URL=https://new-reach-backend.herokuapp.com --app new-reach-backend
-https://new-reach-backend.herokuapp.com
-git clean -fd
-heroku logs --tail --app new-reach-backend
-heroku config --app new-reach-backend
-npm install
-rm -rf node_modules package-lock.json
-npm install
-git add .
-git commit -m "Fix dependencies"
-git push heroku main
-curl http://localhost:3000/
-git push heroku main
-heroku restart --app new-reach-backend
-heroku logs --tail --app new-reach-backend
-heroku config --app new-reach-backend
-npm start
-heroku apps:destroy --app reach-backend
-heroku apps:destroy --app reach-backend
-heroku logs --tail --app new-reach-backend
-node server.js
-Error: Cannot find module 'C:\Users\phill\server.js'
-npm start
-git add .
-git commit -m "Fix server file path"
-heroku logs --tail --app new-reach-backend
-npm start
-cd path/to/your/project
-ls
-npm start
-npm init -y
-npm install
-npm start
-ls
-npm run
-npm start
-npm init -y
-npm run
-npm start
-ls
-npm install
-npm start
-ls
-npm install
-npm start
-ls
-npm run
-npm start
-npm init -y
-git add .
-git commit -m "Update project files and fix deployment issues"
-git push heroku main
-git remote -v
-heroku git:remote -a new-reach-backend
-heroku config:set PORT=3000
-heroku config
-heroku logs --tail --app new-reach-backend
-heroku logs --tail --app new-reach-backend
-git add .
-git commit -m "Fix backend structure and configurations"
-git push heroku main
-heroku logs --tail --app new-reach-backend
-npm install
-git add package-lock.json
-git commit -m "Add dependencies"
-git push heroku main
-heroku config
-npm start
-npm start
-npm install
-npm start
-sudo systemctl stop mongod
-sudo systemctl start mongod
-sudo systemctl status mongod
-mongo
-node server.js
-sudo journalctl -u mongod
-mongo
-show dbs
-use ReachDatabase
-show collections
-git add .
-git commit -m "Fix MongoDB configuration"
-git push heroku main
-OP-LF2PKB7 MINGW64 ~ (main)
-$
-heroku logs --tail --app new-reach-backend
-heroku config:set PORT=3000 MONGO_URI=<your_mongo_connection_string> --app new-reach-backend
-node server.js
-"main": "server.js"
-"main": "server.js"
-"main": "server.js"
-git add package.json
-git commit -m "Update package.json main entry point"
-git config --global user.name "9thRobotics"
-git config --global user.email "phillipdfilkins@hotmail.com"
-heroku config:set PORT=3000 MONGO_URI=<your_mongo_connection_string> --app new-reach-backend
-heroku config --app new-reach-backend
-node server.js
-git add .
-git commit -m "Fix server crash issues"
-git push heroku main
-git pull origin main
-git push origin main
-heroku config:set PORT=3000 MONGO_URI=<your_mongo_connection_string> --app new-reach-backend
-heroku config --app new-reach-backend
-node server.js
-git add .
-git commit -m "Fix server crash issues"
-git push heroku main
-heroku logs --tail --app new-reach-backend
-git add package.json
-git commit -m "Update package.json to use index.js as entry point"
-git pull origin main
-git push origin main
-git add package.json
-git commit -m "Update package.json to use index.js as entry point"
-git pull origin main
-git push origin main
-git status
-git add .
-git commit -m "Add untracked files"
-git pull origin main --allow-unrelated-histories
-git push origin main
-git pull origin main --allow-unrelated-histories
-git status
-git add .
-git commit -m "Add untracked files"
-git pull origin main --allow-unrelated-histories
-git push heroku main
-ill@DESKTOP-LF2PKB7 MINGW64 ~ (main)
-$
-heroku logs --tail --app new-reach-backend
-npm install
-git add package.json
-git commit -m "Resolve merge conflict in package.json"
-git pull origin main
-git add package.json
-git commit -m "Resolve merge conflict in package.json"
-git pull origin main
-git push origin main
-npm install
-npm install
-git add package.json
-git commit -m "Fix package.json conflicts"
-git push heroku main
-heroku logs --tail --app new-reach-backend
-npm install
-git add package.json
-git commit -m "Fix package.json conflicts"
-git push heroku main
-heroku logs --tail --app new-reach-backend
-git add package.json
-git commit -m "Resolve merge conflict in package.json"
-git pull origin main
-git push origin main
-npm install
-git push heroku main
-git pull heroku main
-git push heroku main
-git pull heroku main
-git push heroku main
-git pull heroku main --allow-unrelated-histories
-git pull heroku main --allow-unrelated-histories
-git pull heroku main --allow-unrelated-histories
-phill@DESKTOP-LF2PKB7 MINGW64 ~ (main)
-git status
-git add package-lock.json
-git commit -m "Save local changes to package-lock.json"
-git pull heroku main --allow-unrelated-histories
-git stash
-git pull heroku main --allow-unrelated-histories
-git stash apply
-git checkout -- package-lock.json
-git pull heroku main --allow-unrelated-histories
-git push heroku main
-git diff
-git add package.json Procfile
-git commit -m "Resolve merge conflicts in package.json and Procfile"
-git pull heroku main --allow-unrelated-histories
-git push heroku main
-git status
-git add new-reach-backend
-git commit -m "Resolve merge conflicts"
-git pull heroku main --allow-unrelated-histories
-git pull heroku main --allow-unrelated-histories
-git push heroku main
-rm package-lock.json
-npm install
-git add package-lock.json
-git commit -m "Regenerate package-lock.json"
-git log -p new-reach-backend
-git add .
-git status
-git add package-lock.json
-git commit -m "Resolve merge conflicts in package-lock.json"
-git pull heroku main --allow-unrelated-histories
-git push heroku main
-heroku logs --tail --app new-reach-backend
-git status
-git add package-lock.json
-git commit -m "Save local changes to package-lock.json"
-git pull heroku main --allow-unrelated-histories
-git stash
-git pull heroku main --allow-unrelated-histories
-git stash apply
-git pull heroku main --allow-unrelated-histories
-git stash apply
-git checkout -- package-lock.json
-npm install
-npm install
-git status
-[200~git add <file>
-git add new-reach-backend
-git commit -m "Resolve merge conflicts"
-git pull heroku main --allow-unrelated-histories
-git push heroku main
-rm package-lock.json
-npm install
-git add package-lock.json
-git commit -m "Regenerate package-lock.json"
-git add package-lock.json
-git add new-reach-backend
-git add .
-git status
-git add package-lock.json
-git add package-lock.json
-git add new-reach-backend
-git add .
-git status
-git status
-git add .
-git commit -m "Resolve merge conflicts and update files"
-git push heroku main
-git add new-reach-backend
-git add reach-backend
-git add reach-frontend
-git commit -m "Resolve merge conflicts and update specific files"
-git push heroku main
-git status
-git add package.json
-git commit -m "Update package.json to use server.js as the entry point"
-git push
-git add package.json
-git commit -m "Update package.json to use server.js as the entry point"
-git add new-reach-backend reach-backend reach-frontend
-git commit -m "Update project files"
-git push --set-upstream origin main
-git config --global push.autoSetupRemote always
-git status
-git log
-git pull origin main
-git push --set-upstream origin main
-git status
-git add .
-git commit -m "Update package.json to use server.js as the entry point and address modified/untracked content"
-git push
-git config --global push.autoSetupRemote true
-git push --set-upstream origin main
-git push heroku main
-heroku logs --tail --app new-reach-backend
-git add package.json
-git commit -m "Update package.json to use server.js as the entry point"
-git add new-reach-backend reach-backend reach-frontend
-git commit -m "Update project files"
-git push --set-upstream origin main
-git config --global push.autoSetupRemote always
-git status
-git log
-npm install
-git add package-lock.json
-git commit -m "Update package-lock.json"
-git push heroku main
-heroku logs --tail --app new-reach-backend
-npm install
-npm install
-git add package-lock.json
-git commit -m "Update package-lock.json"
-git push heroku main
-heroku logs --tail --app new-reach-backend
-heroku local web
-git add package.json
-git commit -m "Fix JSON syntax error in package.json"
-git push origin main
-node -e "console.log(JSON.parse(require('fs').readFileSync('./package.json')))"
-git stash
-git pull origin main --rebase
-git add package.json
-git rebase --continue
-git push origin main
-git push origin main --force
-heroku logs --tail --app new-reach-backend
-git fetch origin
-git diff origin/main
-git add package.json
-git commit -m "Fix JSON syntax error in package.json"
-git push origin main
-git config --global push.autoSetupRemote true
-git config --global --get push.autoSetupRemote
-git push origin main
-heroku local web
-git push heroku main
-heroku logs --tail --app new-reach-backend
-git add package.json
-git commit -m "Add dotenv dependency"
-git push origin main
-git pull origin main --rebase
-git add <conflicting-file>
-git pull origin main --rebase
-git add package.json
-git rebase --continue
-git push origin main --force-with-lease
-git add package.json
-git commit -m "Add dotenv dependency"
-git push origin main
-git fetch origin
-git diff origin/main
-git add package.json
-git commit -m "Fix JSON syntax error in package.json and add dotenv dependency"
-git push origin main
-git pull origin main --rebase
-git push origin main
-git add .
-git commit -m "Commit your changes before pulling"
-git pull origin main --rebase
 git push origin main
 git push heroku main
 git pull origin main --rebase
@@ -498,3 +104,397 @@ git commit -m "Fix package.json syntax and reinstall dependencies"
 git push heroku main
 rm -rf node_modules package-lock.json
 npm install
+source /path/to/git-prompt.sh
+source ~/.bashrc
+cd /path/to/your/git/repo
+source ~/.bashrc
+rm -rf node_modules package-lock.json
+npm install
+heroku local web
+find /usr/share/git-core -name "git-prompt.sh"
+C:\Program Files\Git\usr\share\git-core\git-prompt.sh
+source ~/.bashrc
+cd /path/to/your/git/repo
+source ~/.bashrc
+rm -rf node_modules package-lock.json
+npm install
+heroku local web
+npm install
+git add package-lock.json
+git commit -m "Regenerate package-lock.json"
+git push
+npm install
+git add package-lock.json
+git commit -m "Regenerate package-lock.json"
+git push
+npm install
+git add package-lock.json
+git commit -m "Regenerate package-lock.json"
+git pull origin main --rebase
+git push origin main
+git stash
+git push origin main --force
+npm install
+npm start
+git push heroku main
+heroku logs --tail --app <your-heroku-app-name>
+heroku logs --tail --app <your-heroku-app-name>
+\heroku logs --tail --app new-reach-backend
+npm install dotenv --save
+rm -rf node_modules package-lock.json
+npm install
+git add .
+git commit -m "Add dotenv and regenerate package-lock.json"
+git push origin main
+git push heroku main
+heroku logs --tail --app new-reach-backend
+heroku restart --app new-reach-backend
+heroku logs --tail --app new-reach-backend
+npm install dotenv --save
+git add package.json package-lock.json
+git commit -m "Install dotenv"
+git push heroku main
+heroku config --app new-reach-backend
+MONGO_URI=mongodb+srv://<PhillipFilkins>:<Jezebell#666>@cluster.mongodb.net/ReachDatabase?retryWrites=true&w=majority
+heroku config:set MONGO_URI=mongodb+srv://<PhillipFilkins>:<Jezebell#666>@cluster.mongodb.net/ReachDatabase?retryWrites=true&w=majority
+heroku config:set MONGO_URI="mongodb+srv://PhillipFilkins:Jezebell%23666@cluster.mongodb.net/ReachDatabase?retryWrites=true&w=majority" --app new-reach-backend
+heroku config:set MONGO_URI="mongodb+srv://PhillipFilkins:Jezebell%23666@cluster.mongodb.net/ReachDatabase?retryWrites=true&w=majority" --app new-reach-backend
+heroku config --app new-reach-backend
+heroku restart --app new-reach-backend
+heroku logs --tail --app new-reach-backend
+npm install dotenv --save
+npm install dotenv --save
+npm install dotenv --save
+git add package.json package-lock.json
+git commit -m "Install dotenv"
+git push heroku main
+heroku restart --app new-reach-backend
+@DESKTOP-LF2PKB7 MINGW64 ~ (main)
+$ l
+heroku logs --tail --app new-reach-backend
+npm install
+git add package.json package-lock.json
+git commit -m "Restore dependencies"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+npm install dotenv --save
+git add package.json package-lock.json
+git commit -m "Add dotenv module"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+heroku restart --app new-reach-backend
+heroku open --app new-reach-backend
+heroku logs --tail --app new-reach-backend
+npm install dotenv --save
+git add package.json package-lock.json
+git commit -m "Add dotenv dependency"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+npm install dotenv --save
+git add package.json package-lock.json
+git commit -m "Add dotenv dependency"
+git push heroku main
+heroku config --app new-reach-backend
+heroku restart --app new-reach-backend
+npm start
+npm start
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+heroku restart --app new-reach-backend
+git add .
+git commit -m "Fix and restart node"
+git push heroku main
+git add package.json
+git commit -m "Fix package.json syntax"
+rm -rf node_modules package-lock.json
+npm install
+git push heroku main
+npm start
+npm install
+npm start
+git add package.json
+git commit -m "Fix package.json syntax error"
+git push heroku main
+cat package.json
+rm -rf node_modules package-lock.json
+npm install
+git add package.json
+git commit -m "Fix package.json structure"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+npm install
+rm -rf node_modules package-lock.json
+npm install
+git add package.json
+git commit -m "Fix package.json structure"
+git push heroku main
+heroku logs --tail --app new-reach-backend
+npm install
+web: npm start
+npm run build
+npm install -g serve
+serve -s build
+npm install serve --save
+npm run build
+git add .
+git commit -m "Deploy React app"
+git push heroku main
+npm install package.js --save
+npm install package.js --save
+npm view package
+npm install
+npm list --depth=0
+npm view .
+npm install
+[200~npm install
+git add package.json
+git commit -m "Fix package.json structure"
+git push heroku main
+npm install package.json --save
+npm install nodemon --save-dev
+npm install -g serve
+"proxy": "http://localhost:3000"
+serve -s build
+npm install
+npm list --depth=0
+npm view .
+npm install
+npm install
+git add package.json
+git commit -m "Fix package.json structure"
+git push heroku main
+npm install
+npm install
+git add package.json
+git commit -m "Fix package.json structure"
+git push heroku main
+rm -rf package-lock.json node_modules
+npm install
+npm install
+git add package.json
+git commit -m "Fix package.json structure"
+git push heroku main
+heroku logs --tail
+npm install
+git clone https://github.com/9thRobotics/New-Reach-Backend.git
+cd New-Reach-Backend
+npm start
+git clone https://github.com/9thRobotics/New-Reach-Backend.git New-Reach-Backend-Clone
+cd New-Reach-Backend-Clone
+cd New-Reach-Backend-Clone
+npm install
+npm start
+npm start
+heroku logs --tail
+npm install
+npm install dotenv
+heroku login
+heroku create new-reach-backend
+git remote add heroku https://git.heroku.com/new-reach-backend.git
+git push heroku main
+heroku config:set KEY=VALUE
+heroku open
+heroku logs --tail --app new-reach-backend-d530ec69bf02
+heroku restart --app new-reach-backend-d530ec69bf02
+heroku config --app new-reach-backend-d530ec69bf02
+git init
+git add .
+git commit -m "Updated project with new features for 9th Dimension Robotics"
+heroku git:remote -a new-reach-backend-d530ec69bf02
+git push heroku main
+https://new-reach-backend-d530ec69bf02.herokuapp.com/
+git clone https://github.com/9thRobotics/Reach-Frontend.git
+cd Reach-Frontend
+npm run build
+npm start
+git add .
+git commit -m "Added server.js and integrated backend for Reach Frontend"
+git push origin main
+web: node server.js
+git add .
+git commit -m "Prepare for Heroku deployment"
+git push heroku main
+git remote -v
+heroku git:remote -a your-heroku-app-name
+heroku git:remote -a new-reach-backend
+git add .
+git commit -m "Prepare for Heroku deployment"
+git push heroku main
+node server.js
+git pull heroku main
+git push heroku main
+git push heroku main --force
+node server.js
+heroku config:set MONGO_URI="your-mongo-connection-string"
+npm run build
+heroku config:set PORT=5000
+git add .
+git commit -m "Update server.js for Heroku"
+git push heroku main
+git pull heroku main
+git add .
+git commit -m "Resolve merge conflicts"
+git push heroku main
+git push heroku main --force
+npm install --legacy-peer-deps
+node_modules/
+git rm -r --cached node_modules
+git add .
+git commit -m "Fix dependency conflicts and update package.json"
+git push heroku main --force
+npm install vite@^3.0.0
+npm install @vitejs/plugin-react@latest
+git add package.json package-lock.json
+git commit -m "Fix Vite dependency conflict"
+git add package.json
+git commit -m "Specify Node.js version"
+git rm -r --cached node_modules
+git push heroku main --force
+git add package.json
+git commit -m "Add legacy-peer-deps for Heroku"
+git push heroku main --force
+heroku open
+heroku logs --tail
+npm install
+web: npm start
+git push heroku main
+npm install
+web: npm start
+git push heroku main
+git pull heroku main
+git push heroku main
+git pull heroku main
+git pull heroku main --allow-unrelated-histories
+git push heroku main
+git fetch heroku main
+git merge heroku/main --allow-unrelated-histories
+git push heroku main
+git pull origin main
+git push heroku main --force
+heroku logs --tail
+git fetch heroku main
+git merge heroku/main --allow-unrelated-histories
+git push heroku main --force
+heroku logs --tail
+npm install vite@3.2.11 @vitejs/plugin-react@2.2.0 --save-dev
+heroku config:set KEY=VALUE
+heroku config
+heroku repo:purge_cache -a your-app-name
+npm install vite@3.2.11 @vitejs/plugin-react@2.2.0 --save-dev
+heroku config:set KEY=VALUE
+heroku config
+heroku repo:purge_cache -a new-reach-backend
+y
+git add .
+git commit -m "Fix dependency and server issues"
+git push heroku main --force
+heroku logs --tail
+git fetch heroku main
+git merge heroku/main --allow-unrelated-histories
+git push heroku main --force
+heroku logs --tail
+git add package.json
+git commit -m "Specify Node.js version"
+git push heroku main
+git add package.json
+git commit -m "Specify Node.js version"
+git push heroku main
+heroku repo:purge_cache -a new-reach-backend
+npm install --legacy-peer-deps
+heroku buildpacks
+heroku buildpacks:set heroku/nodejs -a new-reach-backend
+git push heroku main
+heroku logs --tail
+git pull heroku main
+git pull heroku main
+git add <conflicted-files>
+git commit -m "Resolve merge conflicts"
+git push heroku main
+heroku logs --tail
+heroku repo:purge_cache -a new-reach-backend
+heroku plugins:install heroku-repo
+heroku repo:purge_cache -a new-reach-backend
+heroku update
+heroku repo:purge_cache -a new-reach-backend
+heroku plugins
+heroku plugins:install heroku-repo
+heroku repo:purge_cache -a new-reach-backend
+heroku --version
+heroku repo:purge_cache -a new-reach-backend
+rm -rf node_modules
+git add .
+git commit -m "Clear build cache"
+git add .
+git commit -m "Clear build cache"
+git push heroku main --force
+heroku plugins:install heroku-repo
+cd C:\Users\phill
+dir package.json
+del package.json
+heroku plugins:install heroku-repo
+yarn cache clean
+heroku plugins:install heroku-repo
+heroku plugins:install heroku-repo
+heroku config:set CLEAR_BUILD_CACHE=1 -a new-reach-backend
+git push heroku main
+y
+web: npm start
+rm -rf node_modules package-lock.json
+npm install
+npm install -g npm@latest
+npm run build
+git add .
+git commit -m "Fix build issues"
+git push heroku main
+git pull
+git pull origin master --allow-unrelated-histories
+git status
+git add package.json
+git commit -m "Resolved merge conflict in package.json"
+Git pull origin master
+Git pull origin master –allow-unrelated-histories
+git commit -m git add package.json
+git push -u origin main 
+Git pull origin master –allow-unrelated-histories
+Git add .env
+git commit -m “fix merge conflict”
+git commit -m git add .env
+git commit -m git  .env
+git status
+git pull
+git pull origin master
+Git pull origin master –allow-unrelated-histories
+git add reach-frontend
+git commit -m “fix merge conflict in reach-frontend”
+git commit -m “fix merge conflict in reach-frontend”
+git push -u origin main 
+Git pull
+Git pull origin master
+Git pull origin master –allow-unrelated-histories
+Git add  github.com/9thRobotics/Reach-Frontend.git
+git commit -m “fix merge conflict in github.com/9thRobotics/Reach-Frontend.git”
+git push -u origin main \
+git push -u origin main 
+Git pull
+Git pull origin master
+Git pull origin master –allow-unrelated-histories
+Git add  New-Reach-Backend/New-Reach-Backend-Clone/Reach-Frontend
+git commit -m “New-Reach-Backend/New-Reach-Backend-Clone/Reach-Frontend”
+git push -u origin main 
+git push -u origin main
+Git pull origin master –allow-unrelated-histories
+Git add  .gitignore
+git commit -m “fix merge conflict”
+git push -u origin main 
+git pull origin main --rebase
+git add <file>
+Git pull
+Git pull origin master
+Git pull origin master –allow-unrelated-histories
+Git add  package.json .gitignore .env server.js .gitignore reach-frontend~840bc7c75b62c248622c957982b1b9b8a89a5264 
+git commit -m “fix merge conflict”
+git push -u origin main 
+git status
+git merge --abort  # If merge conflicts exist
+git pull origin main --allow-unrelated-histories

@@ -10,9 +10,14 @@
 
 # hlsearch on (H) or off (h):
 ~h
+# Last Search Pattern:
+~Msle0~/\<Merge\>
+
 # Command Line History (newest to oldest):
 
 # Search String History (newest to oldest):
+? \<Merge\>
+|2,1,1735600826,,"\\<Merge\\>"
 
 # Expression History (newest to oldest):
 
@@ -21,16 +26,34 @@
 # Debug Line History (newest to oldest):
 
 # Registers:
+""1	LINE	0
+	 especially if it merges an updated upstream into a topic branch.
+|3,1,1,1,1,0,1735600734," especially if it merges an updated upstream into a topic branch."
+"-	CHAR	0
+	#
+|3,0,36,0,1,0,1735600732,"#"
 
 # File marks:
-'0  1  39  ~/.git/MERGE_MSG
-|4,48,1,39,1735285263,"~/.git/MERGE_MSG"
+'0  1  0  ~/new-reach-backend/New-Reach-Backend-Clone/reach-frontend/.git/MERGE_MSG
+|4,48,1,0,1735600870,"~/new-reach-backend/New-Reach-Backend-Clone/reach-frontend/.git/MERGE_MSG"
+'1  1  39  ~/.git/MERGE_MSG
+|4,49,1,39,1735285263,"~/.git/MERGE_MSG"
 
 # Jumplist (newest first):
+-'  1  0  ~/new-reach-backend/New-Reach-Backend-Clone/reach-frontend/.git/MERGE_MSG
+|4,39,1,0,1735600870,"~/new-reach-backend/New-Reach-Backend-Clone/reach-frontend/.git/MERGE_MSG"
+-'  1  39  ~/.git/MERGE_MSG
+|4,39,1,39,1735285263,"~/.git/MERGE_MSG"
 -'  1  39  ~/.git/MERGE_MSG
 |4,39,1,39,1735285263,"~/.git/MERGE_MSG"
 
 # History of marks within files (newest to oldest):
+
+> ~/new-reach-backend/New-Reach-Backend-Clone/reach-frontend/.git/MERGE_MSG
+	*	1735600870	0
+	"	1	0
+	.	3	0
+	+	3	0
 
 > ~/.git/MERGE_MSG
 	*	1735285205	0
