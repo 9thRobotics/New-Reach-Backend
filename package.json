@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "Backend for the New Reach Project",
   "main": "server.js",
-  
   "scripts": {
     "start": "node server.js"
   },
-  "engines ": {
+  "engines": {
     "node": ">=16.x"
   },
   "dependencies": {
@@ -17,6 +16,4 @@
   "keywords": [],
   "author": "9th Dimension Robotics Company",
   "license": "MIT"
-  }
- }
 }
