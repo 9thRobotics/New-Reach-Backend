@@ -1,39 +1,3 @@
-git push origin main
-git push heroku main
-git pull origin main --rebase
-git add package.json
-git rebase --continue
-git push origin main --force-with-lease
-heroku logs --tail --app new-reach-backend
-git add package.json
-git commit -m "Fix JSON syntax error in package.json"
-git commit -m "Fix JSON syntax error in package.json"
-git push origin main
-git push heroku main
-phill@DESKTOP-LF2PKB7 MINGW64 ~ (main)
-$ git push heroku main
-Enumerating objects: 14, done.
-Counting objects: 100% (14/14), done.
-Delta compression using up to 12 threads
-Compressing objects: 100% (10/10), done.
-Writing objects: 100% (10/10), 2.59 KiB | 1.29 MiB/s, done.
-Total 10 (delta 7), reused 0 (delta 0), pack-reused 0 (from 0)
-remote: Updated 726 paths from 0b0aff4
-remote: Compressing source files... done.
-remote: Building source:
-remote:
-remote: -----> Building on the Heroku-24 stack
-remote: -----> Using buildpack: heroku/nodejs
-remote: -----> Node.js app detected
-remote: jq: parse error: Expected separator between values at line 12, column 1
-remote:  !     Unable to parse package.json
-remote:
-remote:
-remote: -----> Build failed
-remote:
-remote: We're sorry this build is failing! You can troubleshoot common issues here:
-remote: https://devcenter.heroku.com/articles/troubleshooting-node-deploys
-remote:
 remote: If you're stuck, please submit a ticket so we can help:
 remote: https://help.heroku.com/
 remote:
@@ -498,3 +462,39 @@ git push -u origin main
 git status
 git merge --abort  # If merge conflicts exist
 git pull origin main --allow-unrelated-histories
+git status
+git merge --abort  # If merge conflicts exist
+git pull origin main --allow-unrelated-histories
+git add .
+git commit -m "Resolved conflicts"
+git push heroku main
+heroku logs --tail
+git pull heroku main --allow-unrelated-histories
+git pull heroku main --allow-unrelated-histories
+git commit -m "Resolved merge conflicts with Heroku main"
+git push heroku main
+heroku logs --tail
+heroku logs --tail -a new-reach-backend
+heroku domains:add www.reachtoken.com -a new-reach-backend
+heroku domains:wait 'www.reachtoken.com' -a new-reach-backend
+heroku domains:add reachtoken.io -a new-reach-backend
+heroku domains:wait reachtoken.io -a new-reach-backend
+heroku certs:auto:enable -a new-reach-backend
+heroku domains:wait 'reachtoken.io' -a new-reach-backend
+heroku certs:auto -a new-reach-backend
+heroku certs:auto -a new-reach-backend
+heroku certs:auto:refresh -a new-reach-backend
+heroku certs:auto -a new-reach-backend
+heroku certs:auto:refresh -a new-reach-backend
+heroku domains:add reachtoken.io -a new-reach-backend
+heroku domains:add reachtoken.io -a new-reach-backend
+heroku domains:add www.reachtoken.io -a new-reach-backend
+heroku certs:auto:enable -a new-reach-backend
+heroku domains -a new-reach-backend
+heroku certs:auto -a new-reach-backend
+heroku domains -a new-reach-backend
+heroku certs:auto:enable -a new-reach-backend
+heroku certs:auto -a new-reach-backend
+heroku certs:auto:refresh -a new-reach-backend
+heroku certs:auto:refresh -a new-reach-backend
+heroku certs:auto -a new-reach-backend
