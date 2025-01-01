@@ -12,3 +12,16 @@ app.listen(PORT, () => {
 }).on('error', (err) => {
   console.error('Failed to start server:', err);
 });
+const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(`https://${req.headers.host}${req.url}`);
+  }
+  next();
+});
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server running');
+});
