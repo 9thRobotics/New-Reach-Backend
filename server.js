@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const { celebrate, Joi, errors } = require('celebrate');
 
 const app = express();
 dotenv.config();
@@ -10,6 +13,11 @@ dotenv.config();
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(helmet());
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+}));
 
 // MongoDB Connection
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/reach-backend';
@@ -25,8 +33,7 @@ const tokenSchema = new mongoose.Schema({
 });
 
 const Token = mongoose.model('Token', tokenSchema);
-const tokensRouter = require('./tokens');
-app.use('/api/tokens', tokensRouter);
+
 // Routes
 app.get('/', (req, res) => {
   res.send('9th Dimension Robotics Company');
@@ -45,11 +52,12 @@ app.get('/api/tokens', async (req, res) => {
   }
 });
 
-app.post('/api/tokens/purchase', async (req, res) => {
+app.post('/api/tokens/purchase', celebrate({
+  body: Joi.object({
+    amount: Joi.number().greater(0).required(),
+  }),
+}), async (req, res) => {
   const { amount } = req.body;
-  if (!amount || amount <= 0) {
-    return res.status(400).json({ message: 'Invalid token amount' });
-  }
   try {
     const newToken = new Token({ amount });
     await newToken.save();
@@ -71,6 +79,9 @@ app.delete('/api/tokens/:id', async (req, res) => {
     res.status(500).json({ message: 'Error deleting token', error: err.message });
   }
 });
+
+// Celebrate error handling
+app.use(errors());
 
 // Start Server
 const PORT = process.env.PORT || 3000;
