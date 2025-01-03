@@ -25,7 +25,8 @@ const tokenSchema = new mongoose.Schema({
 });
 
 const Token = mongoose.model('Token', tokenSchema);
-
+const tokensRouter = require('./tokens');
+app.use('/api/tokens', tokensRouter);
 // Routes
 app.get('/', (req, res) => {
   res.send('9th Dimension Robotics Company');
