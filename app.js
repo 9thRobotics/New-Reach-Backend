@@ -11,6 +11,10 @@ app.use((req, res, next) => {
   next();
 });
 
+// Import and use the tokens routes
+const tokensRouter = require('./tokens');
+app.use('/api/tokens', tokensRouter);
+
 // Define your routes here
 app.get('/', (req, res) => {
   res.send('Hello, secure world!');
