@@ -11,9 +11,14 @@
   },
   "dependencies": {
     "body-parser": "^1.20.3",
+    "celebrate": "^15.0.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "joi": "^17.13.3",
+    "mongoose": "^8.9.3"
   },
   "keywords": [],
   "author": "9th Dimension Robotics Company",
