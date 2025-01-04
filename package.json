@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js"
   },
-<<<<<<< HEAD
+  "author": "9th Dimension Robotics Company",
+  "license": "MIT",
   "engines": {
     "node": ">=16.x"
   },
@@ -20,23 +21,5 @@
     "helmet": "^8.0.0",
     "joi": "^17.13.3",
     "mongoose": "^8.9.3"
-  },
-  "keywords": [],
-  "author": "9th Dimension Robotics Company",
-  "license": "MIT"
-=======
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^16.0.0",
-    "express": "^4.18.2",
-    "mongoose": "^7.0.0",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "helmet": "^6.0.1",
-    "express-rate-limit": "^6.7.0",
-    "celebrate": "^15.1.2",
-    "joi": "^17.7.0"
   }
->>>>>>> 4387b5e1bd3bb8cd35a7039a00f4f325f4ed7263
 }
