@@ -1,133 +1,3 @@
-remote: If you're stuck, please submit a ticket so we can help:
-remote: https://help.heroku.com/
-remote:
-remote: Love,
-remote: Heroku
-remote:
-remote:  !     Push rejected, failed to compile Node.js app.
-remote:
-remote:  !     Push failed
-remote: Verifying deploy...
-remote:
-remote: !       Push rejected to new-reach-backend.
-remote:
-To https://git.heroku.com/new-reach-backend.git
- ! [remote rejected] main -> main (pre-receive hook declined)
-error: failed to push some refs to 'https://git.heroku.com/new-reach-backend.git
-npm start
-npm install
-npm start
-git add package.json
-git commit -m "Fix JSON syntax error in package.json"
-git push origin main
-git push heroku main
-cat package.json | jq
-npm install
-git add package.json
-git commit -m "Fix package.json syntax issue"
-git push origin main
-git push heroku main
-heroku logs --tail --app new-reach-backend
-npm install dotenv
-git add package.json package-lock.json
-git commit -m "Add dotenv to dependencies"
-git push heroku main
-heroku logs --tail --app new-reach-backend
-heroku restart --app new-reach-backend
-heroku config:set KEY=VALUE --app new-reach-backend
-heroku logs --tail --app new-reach-backend
-npm install dotenv --save
-git add package.json package-lock.json
-git commit -m "Add dotenv to dependencies"
-git push heroku main
-heroku restart --app new-reach-backend
-heroku logs --tail --app new-reach-backend
-heroku config:set KEY=VALUE --app new-reach-backend
-npm install dotenv --save
-git add package.json package-lock.json
-git commit -m "Add dotenv to dependencies"
-git push heroku main
-heroku restart --app new-reach-backend
-heroku logs --tail --app new-reach-backend
-npm install dotenv --save
-rm -rf node_modules package-lock.json
-npm install
-git add .
-git commit -m "Clean install of dependencies"
-git push heroku main
-rm -rf node_modules package-lock.json
-npm install
-rm -rf node_modules package-lock.json
-npm install
-rm -rf node_modules package-lock.json
-npm install
-rm -rf node_modules package-lock.json
-npm install
-git add package.json package-lock.json
-git commit -m "Fix package.json syntax and reinstall dependencies"
-git push heroku main
-rm -rf node_modules package-lock.json
-npm install
-source /path/to/git-prompt.sh
-source ~/.bashrc
-cd /path/to/your/git/repo
-source ~/.bashrc
-rm -rf node_modules package-lock.json
-npm install
-heroku local web
-find /usr/share/git-core -name "git-prompt.sh"
-C:\Program Files\Git\usr\share\git-core\git-prompt.sh
-source ~/.bashrc
-cd /path/to/your/git/repo
-source ~/.bashrc
-rm -rf node_modules package-lock.json
-npm install
-heroku local web
-npm install
-git add package-lock.json
-git commit -m "Regenerate package-lock.json"
-git push
-npm install
-git add package-lock.json
-git commit -m "Regenerate package-lock.json"
-git push
-npm install
-git add package-lock.json
-git commit -m "Regenerate package-lock.json"
-git pull origin main --rebase
-git push origin main
-git stash
-git push origin main --force
-npm install
-npm start
-git push heroku main
-heroku logs --tail --app <your-heroku-app-name>
-heroku logs --tail --app <your-heroku-app-name>
-\heroku logs --tail --app new-reach-backend
-npm install dotenv --save
-rm -rf node_modules package-lock.json
-npm install
-git add .
-git commit -m "Add dotenv and regenerate package-lock.json"
-git push origin main
-git push heroku main
-heroku logs --tail --app new-reach-backend
-heroku restart --app new-reach-backend
-heroku logs --tail --app new-reach-backend
-npm install dotenv --save
-git add package.json package-lock.json
-git commit -m "Install dotenv"
-git push heroku main
-heroku config --app new-reach-backend
-MONGO_URI=mongodb+srv://<PhillipFilkins>:<Jezebell#666>@cluster.mongodb.net/ReachDatabase?retryWrites=true&w=majority
-heroku config:set MONGO_URI=mongodb+srv://<PhillipFilkins>:<Jezebell#666>@cluster.mongodb.net/ReachDatabase?retryWrites=true&w=majority
-heroku config:set MONGO_URI="mongodb+srv://PhillipFilkins:Jezebell%23666@cluster.mongodb.net/ReachDatabase?retryWrites=true&w=majority" --app new-reach-backend
-heroku config:set MONGO_URI="mongodb+srv://PhillipFilkins:Jezebell%23666@cluster.mongodb.net/ReachDatabase?retryWrites=true&w=majority" --app new-reach-backend
-heroku config --app new-reach-backend
-heroku restart --app new-reach-backend
-heroku logs --tail --app new-reach-backend
-npm install dotenv --save
-npm install dotenv --save
 npm install dotenv --save
 git add package.json package-lock.json
 git commit -m "Install dotenv"
@@ -498,3 +368,133 @@ heroku certs:auto -a new-reach-backend
 heroku certs:auto:refresh -a new-reach-backend
 heroku certs:auto:refresh -a new-reach-backend
 heroku certs:auto -a new-reach-backend
+heroku certs:auto:refresh -a new-reach-backend
+heroku certs:auto -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+heroku domains:remove www.reachtoken.io -a new-reach-backend
+heroku domains:remove reachtoken.io -a new-reach-backend
+heroku domains:add www.reachtoken.io -a new-reach-backend
+heroku domains:add reachtoken.io -a new-reach-backend
+heroku domains:wait 'reachtoken.io'
+heroku domains:wait 'www.reachtoken.io'
+heroku certs:auto:refresh -a new-reach-backend
+heroku domains:wait reachtoken.io -a new-reach-backend
+heroku domains:wait www.reachtoken.io -a new-reach-backend
+heroku certs:auto:refresh -a new-reach-backend
+heroku domains:add www.reachtoken.io -a new-reach-backend
+heroku domains:add reachtoken.io -a new-reach-backend
+heroku stack
+heroku logs --tail -a new-reach-backend
+curl -X GET https://new-reach-backend-d530ec69bf02.herokuapp.com/
+curl -X GET https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
+curl -X GET https://reachtoken.io/
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
+ll@DESKTOP-LF2PKB7 MINGW64 ~ (main)
+$
+curl -X GET https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
+git add .
+git commit -m "Added /api/tokens and /api/tokens/purchase endpoints"
+git push heroku main
+curl -X GET https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
+heroku logs --tail -a new-reach-backend
+npm install express body-parser cors
+git add .
+git commit -m "Fixed tokens route setup"
+git push heroku main
+heroku logs --tail -a new-reach-backend
+curl -X GET https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
+npm install express
+git add .
+git commit -m "Fix tokens route setup"
+git push heroku main
+curl -X GET https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
+git add .
+git commit -m "Ensure /api/tokens route works"
+git push heroku main
+git status
+git add .
+git add path/to/file
+git commit -m "Ensure /api/tokens route works"
+git push heroku main
+heroku logs --tail -a new-reach-backend
+git add .
+git commit -m "Fix routes for /api/tokens"
+git push heroku main
+heroku restart -a new-reach-backend
+curl -X GET https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
+git add .
+git commit -m "Fix routes for /api/tokens"
+git push heroku main
+heroku restart -a new-reach-backend
+curl -X GET https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
+git status
+git add .
+git commit -m "Fixed /api/tokens/purchase route"
+git push heroku main
+heroku logs --tail -a new-reach-backend
+heroku restart -a new-reach-backend
+node server.js
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' http://localhost:3000/api/tokens/purchase
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+node server.js
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' http://localhost:3000/api/tokens/purchase
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+[200~
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+heroku restart -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+heroku restart -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+heroku restart -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+node server.js
+curl -X GET http://localhost:3000/api/tokens
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' http://localhost:3000/api/tokens/purchase
+git add .
+git commit -m "Fix middleware and routing issues"
+git push heroku main
+curl -X GET https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
+curl -X POST -H "Content-Type: application/json" -d '{"amount": 10}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+npm test
+curl -I http://reachtoken.io
+curl -I http://www.reachtoken.io
+curl -I http://reachtoken.io
+curl -I http://www.reachtoken.io
+curl -I http://reachtoken.io
+url -I http://www.reachtoken.iourl -I http://www.reachtoken.io
+curl -I http://www.reachtoken.io
+ curl -I http://reachtoken.io
+curl -I http://reachtoken.io
+curl -I http://www.reachtoken.io
+curl -I http://api.reachtoken.io
+npm run build
+npm install
+npm run dev
+npm run build
+npm run preview
+cd path/to/your/project
+npm install
+npm run dev
+cd ~/Reach-Frontend
+npm install
+npm run dev
+npm run dev
+cd ~/Reach-Frontend
+npm install
+npm run dev
+npm run dev
+npm run dev
+npm run dev
+npm install cors
+npm run dev -- --host
+VITE_BACKEND_URL=http://localhost:3000
+VITE_BACKEND_URL=https://your-backend-domain.com
+VITE_BACKEND_URL=http://localhost:3000  # Local Development
+VITE_BACKEND_URL=https://api.reachtoken.io  # Production
