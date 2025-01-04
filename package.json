@@ -1,11 +1,12 @@
 {
   "name": "new-reach-backend",
   "version": "1.0.0",
-  "description": "Backend for the New Reach Project",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
+<<<<<<< HEAD
   "engines": {
     "node": ">=16.x"
   },
@@ -23,4 +24,19 @@
   "keywords": [],
   "author": "9th Dimension Robotics Company",
   "license": "MIT"
+=======
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "helmet": "^6.0.1",
+    "express-rate-limit": "^6.7.0",
+    "celebrate": "^15.1.2",
+    "joi": "^17.7.0"
+  }
+>>>>>>> 4387b5e1bd3bb8cd35a7039a00f4f325f4ed7263
 }
