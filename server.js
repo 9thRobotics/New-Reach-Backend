@@ -33,7 +33,8 @@ const tokenSchema = new mongoose.Schema({
 });
 
 const Token = mongoose.model('Token', tokenSchema);
-
+// Add this line before the middleware definitions
+app.set('trust proxy', 1);
 // Routes
 app.get('/', (req, res) => {
   res.send('9th Dimension Robotics Company');
