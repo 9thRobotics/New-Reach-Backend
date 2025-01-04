@@ -79,32 +79,6 @@ app.delete('/api/tokens/:id', async (req, res) => {
     res.status(500).json({ message: 'Error deleting token', error: err.message });
   }
 });
-app.get('/api/tokens', async (req, res) => {
-  try {
-    const tokens = await Token.find();
-    if (!tokens.length) {
-      return res.status(404).json({ message: 'No tokens available' });
-    }
-    res.json(tokens);
-  } catch (err) {
-    res.status(500).json({ message: 'Error fetching tokens', error: err.message });
-  }
-});
-
-app.post('/api/tokens/purchase', celebrate({
-  body: Joi.object({
-    amount: Joi.number().greater(0).required(),
-  }),
-}), async (req, res) => {
-  const { amount } = req.body;
-  try {
-    const newToken = new Token({ amount });
-    await newToken.save();
-    res.status(201).json({ message: 'Token purchased successfully', token: newToken });
-  } catch (err) {
-    res.status(500).json({ message: 'Error purchasing token', error: err.message });
-  }
-});
 
 // Celebrate error handling
 app.use(errors());
