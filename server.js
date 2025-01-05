@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 });
 
 // MongoDB Connection
-const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/reach-backend';
+const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/new-reach-backend';
 mongoose
   .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected successfully!'))
