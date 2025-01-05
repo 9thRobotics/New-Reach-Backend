@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-const mongoURI = process.env.MONGO_URI || 'MONGO_URI=mongodb+srv://phillipdfilkins:Jezebell%23666@cluster0.mongodb.net/ new-reach-backend retryWrites=true&w=majority';
+const mongoURI = process.env.MONGO_URI || 'MONGO_URI=mongodb+srv://phillip:securePass123@cluster0.mongodb.net/reachDB?retryWrites=true&w=majority';
 
 async function testConnection() {
     try {
