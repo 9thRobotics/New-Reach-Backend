@@ -18,25 +18,11 @@ app.use(rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
 }));
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-
-const app = express();
-
-// Middleware
-app.use(cors());
-app.use(helmet());
+app.set('trust proxy', 1);
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Hello, secure world!');
-});
-
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  res.send('9th Dimension Robotics Company');
 });
 
 // MongoDB Connection
@@ -53,12 +39,6 @@ const tokenSchema = new mongoose.Schema({
 });
 
 const Token = mongoose.model('Token', tokenSchema);
-// Add this line before the middleware definitions
-app.set('trust proxy', 1);
-// Routes
-app.get('/', (req, res) => {
-  res.send('9th Dimension Robotics Company');
-});
 
 // API Routes
 app.get('/api/tokens', async (req, res) => {
