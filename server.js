@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { celebrate, Joi, errors } = require('celebrate');
 const tokensRoute = require('./tokens');
+const url = require('url');
 
 const app = express();
 dotenv.config();
@@ -27,12 +28,28 @@ app.get('/', (req, res) => {
 });
 app.use('/api/tokens', tokensRoute);
 
-// MongoDB Connection
-const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/new-reach-backend';
+// Parse QuotaGuard Static URL from environment
+const proxyUrl = new url.URL(process.env.QUOTAGUARDSTATIC_URL);
+const mongoURI = process.env.MONGO_URI;
+
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  proxy: {
+    host: proxyUrl.hostname,
+    port: proxyUrl.port,
+  },
+  auth: {
+    username: proxyUrl.username,
+    password: proxyUrl.password,
+  },
+};
+
+// Connect to MongoDB through QuotaGuard Static proxy
 mongoose
-  .connect(mongoURI)
-  .then(() => console.log('MongoDB connected successfully!'))
-  .catch((err) => console.error('Error connecting to MongoDB:', err.message));
+  .connect(mongoURI, options)
+  .then(() => console.log('MongoDB connected successfully via QuotaGuard Static!'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 // Celebrate error handling
 app.use(errors());
