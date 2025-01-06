@@ -1,0 +1,59 @@
+// Import required libraries
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+
+// Example Token Schema (adjust as needed)
+const tokenSchema = new mongoose.Schema({
+  tokenId: { type: String, required: true },
+  owner: { type: String, required: true },
+  price: { type: Number, required: true },
+  available: { type: Boolean, default: true },
+});
+
+const Token = mongoose.model('Token', tokenSchema);
+
+// --- ROUTE: GET /api/tokens ---
+// Fetch a list of all available tokens
+router.get('/', async (req, res) => {
+  try {
+    const tokens = await Token.find({ available: true });
+    res.status(200).json(tokens);
+  } catch (error) {
+    console.error('Error fetching tokens:', error);
+    res.status(500).json({ error: 'Failed to fetch tokens.' });
+  }
+});
+
+// --- ROUTE: POST /api/tokens/purchase ---
+// Purchase a token
+router.post('/purchase', async (req, res) => {
+  const { tokenId, buyerAddress } = req.body;
+
+  if (!tokenId || !buyerAddress) {
+    return res.status(400).json({ error: 'Token ID and buyer address are required.' });
+  }
+
+  try {
+    // Find the token
+    const token = await Token.findOne({ tokenId, available: true });
+
+    if (!token) {
+      return res.status(404).json({ error: 'Token not found or already purchased.' });
+    }
+
+    // Simulate the purchase process (e.g., verify payment, update ownership)
+    token.owner = buyerAddress;
+    token.available = false;
+
+    await token.save();
+
+    res.status(200).json({ message: 'Token purchased successfully.', token });
+  } catch (error) {
+    console.error('Error purchasing token:', error);
+    res.status(500).json({ error: 'Failed to purchase token.' });
+  }
+});
+
+// Export the router
+module.exports = router;
