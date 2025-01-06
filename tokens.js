@@ -46,4 +46,13 @@ router.post('/purchase', (req, res) => {
   });
 });
 
+// Additional Routes
+router.get('/', (req, res) => {
+  res.send('Tokens route is working');
+});
+
+router.post('/purchase', (req, res) => {
+  res.send('Purchase route is working');
+});
+
 module.exports = router;
