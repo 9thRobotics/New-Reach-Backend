@@ -15,6 +15,9 @@ router.get('/', (req, res) => {
   });
 });
 
+const tokensRoute = require('./routes/tokens');
+app.use('/api/tokens', tokensRoute);
+
 // POST /api/tokens/purchase
 // Endpoint to handle token purchase requests
 router.post('/purchase', (req, res) => {
