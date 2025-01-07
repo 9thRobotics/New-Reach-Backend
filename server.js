@@ -47,7 +47,12 @@ const options = {
 
 // Connect to MongoDB
 mongoose
-  .connect(mongoURI, options)
+  .connect(mongoURI, {
+    // Remove deprecated options
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+    ...options
+  })
   .then(() => {
     console.log('MongoDB connected successfully via QuotaGuard Static!');
   })
