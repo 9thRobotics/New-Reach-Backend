@@ -1,9 +1,9 @@
-<<<<<<< HEAD
+
 .env
 
 
 .vercel
-=======
+
 # Node.js dependencies
 node_modules/
 npm-debug.log*

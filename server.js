@@ -5,7 +5,9 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const { celebrate, Joi, errors } = require('celebrate');
+const { celebrate, errors } = require('celebrate');
+const tokensRoute = require('./tokens');
+const url = require('url');
 
 const app = express();
 dotenv.config();
@@ -18,68 +20,40 @@ app.use(rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
 }));
-
-// MongoDB Connection
-const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/reach-backend';
-mongoose
-  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected successfully!'))
-  .catch((err) => console.error('Error connecting to MongoDB:', err.message));
-
-// Token Schema and Model
-const tokenSchema = new mongoose.Schema({
-  amount: { type: Number, required: true },
-  timestamp: { type: Date, default: Date.now },
-});
-
-const Token = mongoose.model('Token', tokenSchema);
-// Add this line before the middleware definitions
 app.set('trust proxy', 1);
+
 // Routes
 app.get('/', (req, res) => {
   res.send('9th Dimension Robotics Company');
 });
+app.use('/api/tokens', tokensRoute);
 
-// API Routes
-app.get('/api/tokens', async (req, res) => {
-  try {
-    const tokens = await Token.find();
-    if (!tokens.length) {
-      return res.status(404).json({ message: 'No tokens available' });
-    }
-    res.json(tokens);
-  } catch (err) {
-    res.status(500).json({ message: 'Error fetching tokens', error: err.message });
-  }
-});
+// Parse QuotaGuard Static URL from environment
+const proxyUrl = process.env.QUOTAGUARDSTATIC_URL;
+const mongoURI = process.env.MONGO_URI;
 
-app.post('/api/tokens/purchase', celebrate({
-  body: Joi.object({
-    amount: Joi.number().greater(0).required(),
-  }),
-}), async (req, res) => {
-  const { amount } = req.body;
-  try {
-    const newToken = new Token({ amount });
-    await newToken.save();
-    res.status(201).json({ message: 'Token purchased successfully', token: newToken });
-  } catch (err) {
-    res.status(500).json({ message: 'Error purchasing token', error: err.message });
-  }
-});
+// Extract proxy details from QUOTAGUARDSTATIC_URL
+const proxyDetails = new url.URL(proxyUrl);
+const options = {
+  proxy: {
+    host: proxyDetails.hostname,
+    port: parseInt(proxyDetails.port),
+    auth: {
+      username: proxyDetails.username,
+      password: proxyDetails.password,
+    },
+  },
+};
 
-app.delete('/api/tokens/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const deletedToken = await Token.findByIdAndDelete(id);
-    if (!deletedToken) {
-      return res.status(404).json({ message: 'Token not found' });
-    }
-    res.json({ message: 'Token deleted successfully', token: deletedToken });
-  } catch (err) {
-    res.status(500).json({ message: 'Error deleting token', error: err.message });
-  }
-});
+// Connect to MongoDB
+mongoose
+  .connect(mongoURI, options)
+  .then(() => {
+    console.log('MongoDB connected successfully via QuotaGuard Static!');
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
 
 // Celebrate error handling
 app.use(errors());
