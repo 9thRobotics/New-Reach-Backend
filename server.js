@@ -5,7 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const { celebrate, Joi, errors } = require('celebrate');
+const { celebrate, errors } = require('celebrate');
 const tokensRoute = require('./tokens');
 const url = require('url');
 
@@ -29,14 +29,27 @@ app.get('/', (req, res) => {
 app.use('/api/tokens', tokensRoute);
 
 // Parse QuotaGuard Static URL from environment
-const proxyUrl = new url.URL(process.env.QUOTAGUARDSTATIC_URL);
+const proxyUrl = process.env.QUOTAGUARDSTATIC_URL 
+  ? new url.URL(process.env.QUOTAGUARDSTATIC_URL) 
+  : null;
+
 const mongoURI = process.env.MONGO_URI;
 
+// Configure MongoDB connection options
+const connectionOptions = proxyUrl ? {
+  proxy: {
+    protocol: proxyUrl.protocol.slice(0, -1), // Remove trailing colon
+    host: proxyUrl.hostname,
+    port: proxyUrl.port,
+    username: proxyUrl.username,
+    password: proxyUrl.password,
+  },
+} : {};
 
-// Connect to MongoDB through QuotaGuard Static proxy
+// Connect to MongoDB
 mongoose
-  .connect(mongoURI, options)
-  .then(() => console.log('MongoDB connected successfully via QuotaGuard Static!'))
+  .connect(mongoURI, connectionOptions)
+  .then(() => console.log('MongoDB connected successfully!'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // Celebrate error handling
