@@ -32,18 +32,6 @@ app.use('/api/tokens', tokensRoute);
 const proxyUrl = new url.URL(process.env.QUOTAGUARDSTATIC_URL);
 const mongoURI = process.env.MONGO_URI;
 
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  proxy: {
-    host: proxyUrl.hostname,
-    port: proxyUrl.port,
-  },
-  auth: {
-    username: proxyUrl.username,
-    password: proxyUrl.password,
-  },
-};
 
 // Connect to MongoDB through QuotaGuard Static proxy
 mongoose
