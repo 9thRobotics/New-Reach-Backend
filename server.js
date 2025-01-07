@@ -29,28 +29,31 @@ app.get('/', (req, res) => {
 app.use('/api/tokens', tokensRoute);
 
 // Parse QuotaGuard Static URL from environment
-const proxyUrl = process.env.QUOTAGUARDSTATIC_URL 
-  ? new url.URL(process.env.QUOTAGUARDSTATIC_URL) 
-  : null;
-
+const proxyUrl = process.env.QUOTAGUARDSTATIC_URL;
 const mongoURI = process.env.MONGO_URI;
 
-// Configure MongoDB connection options
-const connectionOptions = proxyUrl ? {
+// Extract proxy details from QUOTAGUARDSTATIC_URL
+const proxyDetails = new url.URL(proxyUrl);
+const options = {
   proxy: {
-    protocol: proxyUrl.protocol.slice(0, -1), // Remove trailing colon
-    host: proxyUrl.hostname,
-    port: proxyUrl.port,
-    username: proxyUrl.username,
-    password: proxyUrl.password,
+    host: proxyDetails.hostname,
+    port: parseInt(proxyDetails.port),
+    auth: {
+      username: proxyDetails.username,
+      password: proxyDetails.password,
+    },
   },
-} : {};
+};
 
 // Connect to MongoDB
 mongoose
-  .connect(mongoURI, connectionOptions)
-  .then(() => console.log('MongoDB connected successfully!'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+  .connect(mongoURI, options)
+  .then(() => {
+    console.log('MongoDB connected successfully via QuotaGuard Static!');
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
 
 // Celebrate error handling
 app.use(errors());
