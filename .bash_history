@@ -1,188 +1,3 @@
-heroku restart -a new-reach-backend
-git push heroku main
-heroku logs --tail -a new-reach-backend
-git add .
-git commit -m "Fix API routes and configuration"
-git push heroku main
-curl -X GET https://your-heroku-app.herokuapp.com/api/tokens
-curl -X POST https://your-heroku-app.herokuapp.com/api/tokens/purchase -H "Content-Type: application/json" -d '{"amount": 100}'
-heroku logs --tail -a new-reach-backend
-npm install
-node_modules
-git add .
-git commit -m "Updated package.json and server.js to fix missing mongoose module issue"
-git push origin main
-npm install
-git add package.json package-lock.json
-git commit -m "Add mongoose dependency"
-git push heroku main
-MONGO_URI=mongodb+srv://9thRobotics:Jezebell#666@cluster0.mongodb.net/mydatabase?retryWrites=true&w=majority
-git add .
-git commit -m "Add mongoose dependency"
-git push origin main
-git push heroku main
-heroku logs --tail -a new-reach-backend
-git add .
-git commit -m "Ensure mongoose dependency is included and environment variables are set"
-git push origin main
-git push heroku main
-git pull origin main
-git add .
-git commit -m "Ensure mongoose dependency is included and environment variables are set"
-git push origin main
-git push heroku main
-npm install mongoose
-curl https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
-curl -X POST -H "Content-Type: application/json" -d '{"amount":100}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
-curl https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens
-curl -X POST -H "Content-Type: application/json" -d '{"amount":100}' https://new-reach-backend-d530ec69bf02.herokuapp.com/api/tokens/purchase
-git add package.json
-git commit -m "Resolve merge conflict in package.json"
-git add package.json
-git commit -m "Resolve merge conflict in package.json"
-git push origin main
-git push heroku main
-git add package.json
-git commit -m "Resolve merge conflict in package.json"
-git push origin main
-git push heroku main
-git add package.json
-git commit -m "Fix package.json syntax"
-git push heroku main
-heroku logs --tail -a new-reach-backend
-heroku logs --tail -a new-reach-backend
-git add .env server.js
-git commit -m "Fix MongoDB URI encoding and configure trust proxy for express-rate-limit"
-git push origin main
-git push heroku main
-git add .
-git commit -m "Fix trust proxy for rate limiter"
-git push heroku main
-npm install
-git add .
-git commit -m "Fix package.json issues"
-git push heroku main
-heroku restart -a new-reach-backend
-heroku logs --tail -a new-reach-backend
-git pull origin main
-git push origin main
-git push heroku main
-heroku logs --tail -a <your-app-name>
-heroku logs --tail -a new-reach-backend
-heroku logs --tail -a new-reach-backend
-node server.js
-node server.js
-y
-[200~node test.js
-node test.js
-MongoDB connected successfully!
-heroku config:set MONGO_URI=mongodb+srv://9thRobotics:Jezebell%23666@cluster0.mongodb.net/mydatabase?retryWrites=true&w=majority
-git add .
-git commit -m "Fix MongoDB connection string"
-git push heroku main
-ESKTOP-LF2PKB7 MINGW64 ~ (main)
-$
-node server.js
-git add .
-git commit -m "Update MongoDB connection string"
-git push heroku main
-heroku logs --tail -a new-reach-backend
-node server.js
-git add .
-git commit -m "Update MongoDB connection string"
-git push heroku main
-npm install
-npm install --save-dev
-rm -rf node_modules package-lock.json
-npm install
-npm install
-node server.js
-git add .
-git commit -m "Fix dependency and Node.js version issues"
-git push heroku main
-npm install -g npm@11.0.0
-npm -v
-npm outdated -g
-npm install
-npm update -g
-npm install -g vercel
-npm start
-git push heroku main
-npm install
-npm audit fix
-npm dedupe
-rm -rf node_modules
-rm package-lock.json
-npm install
-git add .
-git commit -m "Reinstall dependencies"
-git push heroku main
-npm outdated
-npm outdated
-npm install <package-name>@latest
-npm uninstall -g windows-build-tools
-npm prune -g
-heroku open
-phill@DESKTOP-LF2PKB7 MINGW64 ~ (main)
-$ npm outdated
-Package   Current  Wanted  Latest  Location               Depended by
-mongoose    7.8.3   7.8.3   8.9.3  node_modules/mongoose  phill
-phill@DESKTOP-LF2PKB7 MINGW64 ~ (main)
-$ npm outdated
-npm install <package-name>@latest
-Package   Current  Wanted  Latest  Location               Depended by
-mongoose    7.8.3   7.8.3   8.9.3  node_modules/mongoose  phill
-bash: package-name: No such file or directory
-phill@DESKTOP-LF2PKB7 MINGW64 ~ (main)
-$ npm uninstall -g windows-build-tools
-npm prune -g
-removed 1 package in 557ms
-npm error global requires add, rm, or update option
-npm error A complete log of this run can be found in: C:\Users\phill\AppData\Local\npm-cache\_logs\2025-01-05T00_46_41_962Z-debug-0.log
-npm install mongoose@latest
-npm uninstall -g windows-build-tools
-npm prune
-npm prune -g
-npm error global requires add, rm, or update option
-npm uninstall -g <package-name>
-npm uninstall -g windows-build-tools --force
-npm install -g <package-name>@latest
-npm doctor
-npm install -g vercel@latest
-npm list -g --depth=0
-npm uninstall -g <package-name>
-npm list -g --depth=0
-npm install -g vercel@latest
-npm install -g vercel@latest
-npm outdated
-npm outdated
-npm install -g <package-name>@latest
-npm update
-heroku logs --tail -a new-reach-backend
-npm install cors
-git add .
-git commit -m "Add CORS support"
-git push heroku main
-heroku logs --tail -a new-reach-backend
-npm install helmet
-git add .
-git commit -m "Add helmet dependency and middleware"
-git push heroku main
-heroku logs --tail -a new-reach-backend
-npm install express-rate-limit
-git add package.json package-lock.json
-git commit -m "Add express-rate-limit to dependencies"
-git push heroku main
-npm install express-rate-limit
-git add package.json package-lock.json
-git commit -m "Add express-rate-limit to dependencies"
-git push heroku main
-heroku logs --tail -a new-reach-backend
-npm install
-npm install
-heroku logs --tail -a new-reach-backend
-npm install celebrate --save
-npm install
 git add .
 git commit -m "Fix: Add missing dependencies including 'celebrate'"
 git push heroku main
@@ -497,4 +312,189 @@ git push origin main
 git add vite.config.js
 git commit -m "Update vite.config.js to use environment variables"
 git push origin main
+git pull origin main
+npm install @vitejs/plugin-react@latest
+npm install --legacy-peer-deps
+npm install @vitejs/plugin-react@latest
+npm install --legacy-peer-deps
+heroku logs --tail -a new-reach-backend
+heroku restart -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+new-reach-backend-d530ec69bf02.herokuapp.com
+https://reach-backend.herokuapp.com
+heroku logs --tail -a new-reach-backend-d530ec69bf02
+heroku logs --tail -a new-reach-backend
+curl -X GET https://new-reach-backend.herokuapp.com/api/tokens
+[200~git push heroku main
+heroku ps:scale web=1 -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+npm install
+npm start
+heroku plugins:install heroku-repo
+heroku repo:purge_cache -a <your-app-name>
+git push heroku main
+curl -X GET https://new-reach-backend.herokuapp.com/api/tokens
+curl -X POST -H "Content-Type: application/json" -d '{"key":"value"}' https://new-reach-backend.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+npm start
+heroku plugins:install heroku-repo
+heroku repo:purge_cache -a <your-app-name>
+git push heroku main
+curl -X GET https://new-reach-backend.herokuapp.com/api/tokens
+curl -X POST -H "Content-Type: application/json" -d '{"key":"value"}' https://new-reach-backend.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+git add .
+git commit -m "Fix missing routes"
+git push heroku main
+npm install
+git add package.json package-lock.json
+git commit -m "Fix dependencies"
+git push heroku main
+npm start
+heroku plugins:install heroku-repo
+heroku repo:purge_cache -a new-reach-backend
+git push heroku main
+curl -X POST -H "Content-Type: application/json"   -d '{"tokenId":"123","buyer":"0xAddress"}'   https://new-reach-backend.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+heroku addons:create quotaguardstatic
+git add .
+git commit -m "Add QuotaGuard Static proxy for MongoDB connection"
+git push heroku main
+heroku logs --tail -a new-reach-backend
+git add .
+git commit -m "Fix API routes"
+git push heroku main
+npm install
+npm install --save express
+curl -X GET https://new-reach-backend.herokuapp.com/api/tokens
+curl -X POST -H "Content-Type: application/json"   -d '{"tokenId":"123","buyer":"0xAddress"}'   https://new-reach-backend.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+git add .
+git commit -m "Fix API routes"
+git push heroku main
+npm install
+npm install --save express
+curl -X GET https://new-reach-backend.herokuapp.com/api/tokens
+curl -X POST -H "Content-Type: application/json"   -d '{"tokenId":"123","buyer":"0xAddress"}'   https://new-reach-backend.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+curl -X GET https://new-reach-backend.herokuapp.com/api/tokens
+curl -X POST -H "Content-Type: application/json"   -d '{"tokenId":"123","buyer":"0xAddress"}'   https://new-reach-backend.herokuapp.com/api/tokens/purchase
+heroku logs --tail -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+heroku domains -a new-reach-backend
+heroku certs:auto:enable -a new-reach-backend
+heroku certs:auto -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+heroku config:get QUOTAGUARDSTATIC_URL -a new-reach-backend
+heroku config:set QUOTAGUARDSTATIC_URL=http://7vzzo56af8ywkb:qkc4bpb0rhsrtng44m798oikwt0xv4@us-east-static-01.quotaguard.com:9293 -a new-reach-backend
+heroku config:set PORT=3000 -a new-reach-backend
+heroku config -a new-reach-backend
+npm start
+heroku logs --tail -a new-reach-backend
+node server.js
+heroku config:set MONGO_URI=your_mongo_db_uri
+heroku config:set QUOTAGUARDSTATIC_URL=your_quotaguardstatic_url
+git add .
+git commit -m "Update server.js"
+git push heroku main
+heroku logs --tail
+heroku config:get MONGO_URI -a new-reach-backend
+heroku restart -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+heroku config:get MONGO_URI -a new-reach-backend
+heroku config:get MONGO_URI -a new-reach-backend
+heroku restart -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+heroku config:get MONGO_URI -a new-reach-backend
+heroku restart -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+mongodb+srv://phillipdfilkins:JBwlSzRU6uzGp7Ch@cluster0.yt6an.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+mongosh "mongodb+srv://phillipdfilkins:JBwlSzRU6uzGp7Ch@cluster0.yt6an.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+heroku config:set MONGO_URI="mongodb+srv://phillipdfilkins:JBwlSzRU6uzGp7Ch@cluster0.yt6an.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" -a new-reach-backend
+heroku restart -a new-reach-backend
+npm start
+heroku logs --tail -a new-reach-backend
+git add .
+git commit -m "Update .env with correct MONGO_URI"
+git push heroku main
+heroku logs --tail
+git add .
+git commit -m "Update .env with correct MONGO_URI"
+git push heroku main
+heroku logs --tail
+heroku config:set MONGO_URI=mongodb+srv://phillipdfilkins:JBwlSzRU6uzGp7Ch@cluster0.yt6an.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+heroku config:set QUOTAGUARDSTATIC_URL=http://7vzzo56af8ywkb:qkc4bpb0rhsrtng44m798oikwt0xv4@us-east-static-01.quotaguard.com:9293
+git add .
+git commit -m "Update .env with correct MONGO_URI"
+git push heroku main
+heroku logs --tail
+heroku config --app new-reach-backend
+git add .
+git commit -m "Update .env and configuration"
+git push heroku main
+npm install
+npm start
+heroku logs --tail -a new-reach-backend
+git add package.json
+git commit -m "Update Vite and plugin-react versions to resolve dependency conflicts"
+git push origin main
+npm install --legacy-peer-deps
+git pull origin main
+git add .
+git commit -m "Resolve merge conflicts"
+git push origin main
+rm -rf node_modules package-lock.json
+\npm install
+npm install
+npm install
+npm install
+npm cache clean --force
+npm install
+git add package.json
+git commit -m "Resolve merge conflict in package.json"
+git push heroku main
+heroku logs --tail -a new-reach-backend
+rm -rf node_modules package-lock.json
+npm install
+git add package-lock.json
+git commit -m "Fix dependencies"
+git push heroku main
+rm -rf node_modules package-lock.json
+npm install
+git add package.json package-lock.json
+git commit -m "Fix package.json and resolve merge conflicts"
+git push heroku main
+heroku logs --tail -a new-reach-backend
+rm -rf node_modules package-lock.json
+npm install
+node server.js
+npm install express
+npm install express
+npm install
+git add package.json package-lock.json
+git commit -m "Fix package.json issues"
+git push heroku main
+heroku logs --tail -a new-reach-backend
+heroku config:get MONGO_URI -a new-reach-backend
+rm -rf node_modules package-lock.json
+npm install
+git add package.json package-lock.json
+git commit -m "Fix package.json and dependencies"
+git push heroku main
+heroku open -a new-reach-backend
+heroku config:set MONGO_URI="mongodb+srv://phillipdfilkins:JBwlSzRU6uzGp7Ch@cluster0.yt6an.mongodb.net/<your-database-name>?retryWrites=true&w=majority" -a new-reach-backend
+heroku config:set MONGO_URI="mongodb+srv://phillipdfilkins:JBwlSzRU6uzGp7Ch@cluster0.yt6an.mongodb.net/new-reach-backend?retryWrites=true&w=majority" -a new-reach-backend
+heroku restart -a new-reach-backend
+heroku logs --tail -a new-reach-backend
+npm install express mongoose body-parser cors dotenv helmet express-rate-limit celebrate
+git add server.js
+git commit -m "Update server.js to remove deprecated MongoDB options"
+git push origin main
+heroku logs --tail -a new-reach-backend
+curl -I http://www.reachtoken.io/
+npm install
+git add package-lock.json
+git commit -m "Synchronize package-lock.json with package.json"
+git push origin main
+git push heroku main
 git pull origin main
