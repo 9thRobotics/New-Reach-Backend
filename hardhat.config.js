@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("@nomiclabs/hardhat-ethers");
 require("dotenv").config();
 
 module.exports = {
@@ -13,11 +14,11 @@ module.exports = {
     },
     networks: {
         goerli: {
-            url: process.env.GOERLI_RPC_URL, // Alchemy/Infura URL
+            url: process.env.GOERLI_RPC_URL || '',
             accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
         },
         sepolia: {
-            url: process.env.SEPOLIA_RPC_URL, // Infura URL
+            url: process.env.SEPOLIA_RPC_URL || '',
             accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
         },
         localhost: {
