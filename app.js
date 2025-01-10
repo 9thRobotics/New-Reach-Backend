@@ -1,18 +1,16 @@
-const express = require('express');
-const mongoose = require('mongoose');
-require('dotenv').config();
+import React from 'react';
+import Header from './components/Header';
+import Tokenomics from './components/Tokenomics';
+import BuyTokens from './components/BuyTokens';
 
-const app = express();
+const App = () => {
+  return (
+    <div>
+      <Header />
+      <Tokenomics />
+      <BuyTokens />
+    </div>
+  );
+};
 
-// MongoDB Connection
-const mongoURI = process.env.MONGO_URI;
-mongoose.connect(mongoURI, {})
-  .then(() => console.log('MongoDB connected successfully!'))
-  .catch((err) => console.error('Error connecting to MongoDB:', err));
-
-// Other middleware and routes here
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+export default App;
