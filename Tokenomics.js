@@ -8,7 +8,7 @@ const Tokenomics = () => {
 
   useEffect(() => {
     const fetchTokenData = async () => {
-      const response = await axios.get('/api/token-stats'); // Backend API
+      const response = await axios.get('https://your-backend-url/api/token-stats'); // Updated Backend API URL
       setStats(response.data);
       setChartData({
         labels: response.data.history.dates,
