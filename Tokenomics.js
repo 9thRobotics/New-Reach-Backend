@@ -1,6 +1,9 @@
+
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
+
+const API_BASE_URL = 'https://api.reachtoken.io';
 
 const Tokenomics = () => {
   const [chartData, setChartData] = useState({});
@@ -8,7 +11,7 @@ const Tokenomics = () => {
 
   useEffect(() => {
     const fetchTokenData = async () => {
-      const response = await axios.get('https://your-backend-url/api/token-stats'); // Updated Backend API URL
+      const response = await axios.get(`${API_BASE_URL}/api/token-stats`); // Updated Backend API URL
       setStats(response.data);
       setChartData({
         labels: response.data.history.dates,
