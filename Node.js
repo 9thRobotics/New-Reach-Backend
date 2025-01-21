@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 // Replace `process.env.MONGO_URI` with your connection string if you're not using environment variables
