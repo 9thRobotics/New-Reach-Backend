@@ -1,26 +1,3 @@
-node test-connection.js
-cd ~/New-Reach-Backend
-ls
-mv ~/reach-token/reach-token/test-connection.js ~/New-Reach-Backend/
-node test-connection.js
-npm install ethers dotenv
-mv ~/reach-token/reach-token/test-connection.js ~/New-Reach-Backend/
-touch ~/New-Reach-Backend/test-connection.js
-nano ~/New-Reach-Backend/test-connection.js
-npm install ethers dotenv
-node test-connection.js
-mv ~/reach-token/reach-token/test-connection.js ~/New-Reach-Backend/
-touch ~/New-Reach-Backend/test-connection.js
-nano ~/New-Reach-Backend/test-connection.js
-npm install ethers dotenv
-node test-connection.js
-curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' https://eth-goerli.g.alchemy.com/v2/lGL0F7roHu05pXFkop4toz7osUywsOU8
-curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' https://eth-goerli.g.alchemy.com/v2/lGL0F7roHu05pXFkop4toz7osUywsOU8
-node test-connection.js
-node test-connection.js
-npx hardhat compile
-npx hardhat run scripts/deploy.js --network goerli
-npx hardhat verify --network goerli 52FCE3VSZA893ZD6BQAJVPKI51RGZAKH1D
 npm list mongoose
 npx hardhat run scripts/deploy.js --network goerli
 node test-alchemy-connection.js
@@ -498,3 +475,26 @@ node app.js
 npm install
 node app.js
 vercel logs new-reach-backend
+npm install --save-dev hardhat ethers
+npx hardhat run scripts/deploy.js --network goerli
+npx hardhat verify --network goerli
+node server.js
+npm install --save-dev hardhat ethers
+npx hardhat run scripts/deploy.js --network mainnet
+npm install web3
+npm install web3
+npx hardhat run scripts/deploy.js --network mainnet
+vercel logs new-reach-backend
+npm i -g vercel@latest
+vercel logs <correct-deployment-name>
+vercel logs new-reach-backend
+vercel logs new-reach-backend
+vercel logs new-reach-backend
+git add .
+git commit -m "Integrated sell functionality"
+git push origin main
+vercel --prod
+git add .
+git commit -m "Integrated sell functionality"
+git push origin main
+npm start
