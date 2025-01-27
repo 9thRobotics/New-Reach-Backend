@@ -1,16 +1,8 @@
-require("@nomicfoundation/hardhat-toolbox");
-require("dotenv").config();
+require("@nomicfoundation/hardhat-toolbox"); // Use official toolbox
+require("dotenv").config(); // Load environment variables
 
 module.exports = {
-  solidity: {
-    version: "0.8.28",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200,
-      },
-    },
-  },
+  solidity: "0.8.28", // Ensure this matches your contract version
   networks: {
     goerli: {
       url: process.env.GOERLI_RPC_URL || '',
