@@ -1,8 +1,8 @@
-require("@nomicfoundation/hardhat-toolbox"); // Use official toolbox
-require("dotenv").config(); // Load environment variables
+require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config(); // No need for "@nomiclabs/hardhat-ethers"
 
 module.exports = {
-  solidity: "0.8.28", // Ensure this matches your contract version
+  solidity: "0.8.28",
   networks: {
     goerli: {
       url: process.env.GOERLI_RPC_URL || '',
