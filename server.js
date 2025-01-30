@@ -13,9 +13,9 @@ app.use(cors({ origin: "*" }));
 
 // MongoDB connection
 mongoose
-  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ MongoDB Connected Successfully"))
-  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
+  .connect(mongoURI)
+  .then(() => console.log('✅ MongoDB Connected Successfully'))
+  .catch(err => console.error('MongoDB Connection Error:', err));
 
 // Transaction Schema
 const transactionSchema = new mongoose.Schema({
