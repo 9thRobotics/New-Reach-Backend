@@ -1,5 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
-require("dotenv").config(); // No need for "@nomiclabs/hardhat-ethers"
+require("dotenv").config();
 
 module.exports = {
   solidity: "0.8.28",
