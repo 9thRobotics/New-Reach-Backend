@@ -1,17 +1,20 @@
 const hre = require("hardhat");
 
 async function main() {
-  const ReachToken = await hre.ethers.getContractFactory("ReachToken");
-  const reachToken = await ReachToken.deploy();
+    // Fetch the contract factory
+    const ReachToken = await hre.ethers.getContractFactory("ReachToken");
 
-  await reachToken.deployed();
+    // Deploy the contract
+    const reachToken = await ReachToken.deploy();
 
-  console.log("ReachToken deployed to:", reachToken.address);
+    await reachToken.deployed();
+    console.log(`✅ ReachToken deployed to: ${reachToken.address}`);
 }
 
+// Execute the script
 main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+    .then(() => process.exit(0))
+    .catch((error) => {
+        console.error(error);
+        process.exit(1);
+    });
