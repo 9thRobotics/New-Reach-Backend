@@ -1,13 +1,23 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 require("@nomiclabs/hardhat-etherscan"); // Ensure Etherscan plugin is enabled
+require("@nomiclabs/hardhat-ethers");
+require("@openzeppelin/hardhat-upgrades"); // Important for upgradeable contracts
 
 module.exports = {
-  solidity: "0.8.19",
+  solidity: {
+    version: "0.8.19",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
   networks: {
     sepolia: {
-      url: process.env.SEPOLIA_RPC_URL,
-      accounts: [process.env.PRIVATE_KEY],
+      url: process.env.SEPOLIA_RPC_URL || "https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID",
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
     },
   },
   etherscan: {
