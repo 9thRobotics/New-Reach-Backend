@@ -1,5 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
+require("@nomiclabs/hardhat-etherscan"); // Ensure Etherscan plugin is enabled
 
 module.exports = {
   solidity: "0.8.19",
