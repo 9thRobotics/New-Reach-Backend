@@ -1,5 +1,5 @@
 async function main() {
-  const [deployer] = await ethers.getSigners();
+  let [deployer] = await ethers.getSigners(); // Add this line to define the deployer
   console.log("Deploying contract with:", deployer.address);
 
   const ReachToken = await ethers.getContractFactory("ReachToken");
