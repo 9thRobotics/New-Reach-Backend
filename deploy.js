@@ -1,15 +1,25 @@
+const { ethers } = require("hardhat");
+
 async function main() {
-  const [deployer] = await ethers.getSigners();
-  console.log("Deploying contract with:", deployer.address);
+  // Instantiate a wallet with a hardcoded private key and provider
+  const provider = new ethers.providers.JsonRpcProvider(process.env.SEPOLIA_RPC_URL);
+  const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
-  // Log the deployer's address
-  console.log(deployer.address);
+  console.log("Deploying contract with:", wallet.address);
 
-  // Get and log the deployer's balance
-  let balance = await ethers.provider.getBalance(deployer.address);
-  console.log("Deployer balance:", ethers.utils.formatEther(balance));
+  // Log the wallet's address
+  console.log(wallet.address);
 
-  const ReachToken = await ethers.getContractFactory("ReachToken");
+  // Get and log the wallet's balance
+  let balance = await provider.getBalance(wallet.address);
+  console.log("Wallet balance:", ethers.utils.formatEther(balance));
+
+  // Check if the wallet has enough balance to deploy the contract
+  if (parseFloat(ethers.utils.formatEther(balance)) < 0.01) {
+    throw new Error("Insufficient funds to deploy the contract");
+  }
+
+  const ReachToken = await ethers.getContractFactory("ReachToken", wallet);
   const contract = await ReachToken.deploy(); // Add constructor params if needed
 
   await contract.deployed();
