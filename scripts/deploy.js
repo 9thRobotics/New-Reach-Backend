@@ -1,15 +1,16 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const Contract = await ethers.getContractFactory("YourContractName");
-  const contract = await Contract.deploy();
-  await contract.deployed();
-  console.log("Contract deployed to:", contract.address);
+  const [deployer] = await ethers.getSigners();
+  console.log("Deploying contracts with:", deployer.address);
+
+  const Token = await ethers.getContractFactory("ReachToken");
+  const token = await Token.deploy("Reach Token", "9D-RC", 18, "1000000000000000000000");
+
+  console.log("Contract deployed at:", token.address);
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
