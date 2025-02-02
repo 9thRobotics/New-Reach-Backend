@@ -16,8 +16,8 @@ module.exports = {
   },
   networks: {
     sepolia: {
-      url: process.env.SEPOLIA_RPC_URL || "https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID",
-      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      url: 'https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+      accounts: ['YOUR_PRIVATE_KEY'],
     },
   },
   etherscan: {
