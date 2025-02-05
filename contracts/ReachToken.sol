@@ -36,8 +36,6 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
         __UUPSUpgradeable_init();
         _mint(msg.sender, TOTAL_SUPPLY);
         unlockPeriod = 7 days;
-        name = "Reach Token";
-        symbol = "9D-RC";
     }
 
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
