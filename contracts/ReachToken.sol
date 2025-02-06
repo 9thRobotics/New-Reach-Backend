@@ -10,7 +10,7 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
     string public constant NAME = "Reach Token";
     string public constant SYMBOL = "9D-RC";
     uint8 public constant DECIMALS = 18;
-    uint256 public constant TOTAL_SUPPLY = 18_000_000_000 * 10**DECIMALS;
+    uint256 public constant TOTAL_SUPPLY = 18000000000 * 10**DECIMALS;
     uint256 public stakingPool;
     uint256 public unlockPeriod;
     uint256 public transactionFee = 50; // 0.5% fee for buyback pool
