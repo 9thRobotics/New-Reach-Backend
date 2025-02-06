@@ -5,15 +5,19 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 
-contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgradeable, UUPSUpgradeable {
-    string public constant NAME = "Reach Token";
-    string public constant SYMBOL = "9D-RC";
-    uint8 public constant DECIMALS = 18;
-    uint256 public constant TOTAL_SUPPLY = 18000000000 * 10**DECIMALS;
+contract ReachToken is 
+    ERC20Upgradeable, 
+    OwnableUpgradeable, 
+    ReentrancyGuardUpgradeable, 
+    UUPSUpgradeable, 
+    PausableUpgradeable 
+{
+    uint256 public constant TOTAL_SUPPLY = 18_000_000_000 * 10**18;
     uint256 public stakingPool;
     uint256 public unlockPeriod;
-    uint256 public transactionFee = 50; // 0.5% fee for buyback pool
+    uint256 public transactionFee; // 0.5% fee for buyback
     uint256 public treasuryReserve;
     uint256 public lockedSupply;
 
@@ -22,15 +26,9 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
     mapping(address => uint256) public stakedBalance;
     mapping(address => uint256) public stakingTimestamp;
     mapping(address => uint256) public stakingMultiplier;
+    mapping(address => uint256) public votingPower;
+    mapping(address => bool) public hasVoted;
 
-    event TokensLocked(address indexed user, uint256 amount, uint256 unlockTime);
-    event TokensUnlocked(address indexed user, uint256 amount);
-    event TokensStaked(address indexed user, uint256 amount, uint256 rewardMultiplier);
-    event TokensUnstaked(address indexed user, uint256 amount);
-    event TokensLockedInReserve(uint256 amountLocked);
-    event TreasuryFunded(uint256 amount);
-
-    // Governance variables
     struct Proposal {
         string description;
         uint256 voteCount;
@@ -38,25 +36,34 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
     }
     
     Proposal[] public proposals;
-    mapping(address => uint256) public votingPower;
-    mapping(address => bool) public hasVoted;
 
+    event TokensLocked(address indexed user, uint256 amount, uint256 unlockTime);
+    event TokensUnlocked(address indexed user, uint256 amount);
+    event TokensStaked(address indexed user, uint256 amount, uint256 rewardMultiplier);
+    event TokensUnstaked(address indexed user, uint256 amount);
+    event TokensLockedInReserve(uint256 amountLocked);
+    event TreasuryFunded(uint256 amount);
     event ProposalCreated(uint256 proposalId, string description);
     event Voted(address indexed voter, uint256 proposalId);
     event ProposalExecuted(uint256 proposalId);
 
     function initialize() public initializer {
-        __ERC20_init(NAME, SYMBOL);
+        __ERC20_init("Reach Token", "9D-RC");
         __Ownable_init();
         __ReentrancyGuard_init();
         __UUPSUpgradeable_init();
+        __Pausable_init();
+
         _mint(msg.sender, TOTAL_SUPPLY);
+
         unlockPeriod = 7 days;
+        transactionFee = 50; // 0.5%
     }
 
+    /// @dev Ensures only the owner can authorize contract upgrades
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
-    function lockTokens(uint256 _amount) external nonReentrant {
+    function lockTokens(uint256 _amount) external nonReentrant whenNotPaused {
         require(balanceOf(msg.sender) >= _amount, "Not enough tokens");
         require(lockedTokens[msg.sender] == 0, "Tokens already locked");
 
@@ -67,7 +74,7 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
         emit TokensLocked(msg.sender, _amount, unlockTimestamp[msg.sender]);
     }
 
-    function unlockTokens() external nonReentrant {
+    function unlockTokens() external nonReentrant whenNotPaused {
         require(block.timestamp >= unlockTimestamp[msg.sender], "Tokens still locked");
         require(lockedTokens[msg.sender] > 0, "No locked tokens");
 
@@ -78,7 +85,7 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
         emit TokensUnlocked(msg.sender, amount);
     }
 
-    function stakeTokens(uint256 _amount, uint256 _months) external nonReentrant {
+    function stakeTokens(uint256 _amount, uint256 _months) external nonReentrant whenNotPaused {
         require(balanceOf(msg.sender) >= _amount, "Not enough tokens");
         require(_months == 3 || _months == 6 || _months == 12, "Invalid staking period");
 
@@ -90,7 +97,7 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
         emit TokensStaked(msg.sender, _amount, stakingMultiplier[msg.sender]);
     }
 
-    function unstakeTokens() external nonReentrant {
+    function unstakeTokens() external nonReentrant whenNotPaused {
         require(stakedBalance[msg.sender] > 0, "No staked tokens");
 
         uint256 amount = stakedBalance[msg.sender];
@@ -151,5 +158,93 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
         // Add your proposal execution logic here
 
         emit ProposalExecuted(proposalId);
+    }
+
+    // Multi-signature wallet support
+    address[] public owners;
+    uint256 public numConfirmationsRequired;
+
+    mapping(address => bool) public isOwner;
+    mapping(uint256 => mapping(address => bool)) public isConfirmed;
+
+    struct Transaction {
+        address to;
+        uint256 value;
+        bytes data;
+        bool executed;
+        uint256 numConfirmations;
+    }
+
+    Transaction[] public transactions;
+
+    event SubmitTransaction(address indexed owner, uint256 indexed txIndex, address indexed to, uint256 value, bytes data);
+    event ConfirmTransaction(address indexed owner, uint256 indexed txIndex);
+    event RevokeConfirmation(address indexed owner, uint256 indexed txIndex);
+    event ExecuteTransaction(address indexed owner, uint256 indexed txIndex);
+
+    modifier onlyOwner() {
+        require(isOwner[msg.sender], "Not owner");
+        _;
+    }
+
+    modifier txExists(uint256 _txIndex) {
+        require(_txIndex < transactions.length, "Tx does not exist");
+        _;
+    }
+
+    modifier notExecuted(uint256 _txIndex) {
+        require(!transactions[_txIndex].executed, "Tx already executed");
+        _;
+    }
+
+    modifier notConfirmed(uint256 _txIndex) {
+        require(!isConfirmed[_txIndex][msg.sender], "Tx already confirmed");
+        _;
+    }
+
+    function submitTransaction(address _to, uint256 _value, bytes memory _data) public onlyOwner {
+        uint256 txIndex = transactions.length;
+
+        transactions.push(Transaction({
+            to: _to,
+            value: _value,
+            data: _data,
+            executed: false,
+            numConfirmations: 0
+        }));
+
+        emit SubmitTransaction(msg.sender, txIndex, _to, _value, _data);
+    }
+
+    function confirmTransaction(uint256 _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) notConfirmed(_txIndex) {
+        Transaction storage transaction = transactions[_txIndex];
+        transaction.numConfirmations += 1;
+        isConfirmed[_txIndex][msg.sender] = true;
+
+        emit ConfirmTransaction(msg.sender, _txIndex);
+    }
+
+    function executeTransaction(uint256 _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+        Transaction storage transaction = transactions[_txIndex];
+
+        require(transaction.numConfirmations >= numConfirmationsRequired, "Cannot execute tx");
+
+        transaction.executed = true;
+
+        (bool success, ) = transaction.to.call{value: transaction.value}(transaction.data);
+        require(success, "Tx failed");
+
+        emit ExecuteTransaction(msg.sender, _txIndex);
+    }
+
+    function revokeConfirmation(uint256 _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+        Transaction storage transaction = transactions[_txIndex];
+
+        require(isConfirmed[_txIndex][msg.sender], "Tx not confirmed");
+
+        transaction.numConfirmations -= 1;
+        isConfirmed[_txIndex][msg.sender] = false;
+
+        emit RevokeConfirmation(msg.sender, _txIndex);
     }
 }
