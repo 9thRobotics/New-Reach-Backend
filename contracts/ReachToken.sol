@@ -161,10 +161,8 @@ contract ReachToken is
     }
 
     // Multi-signature wallet support
-    address[] public owners;
     uint256 public numConfirmationsRequired;
 
-    mapping(address => bool) public isOwner;
     mapping(uint256 => mapping(address => bool)) public isConfirmed;
 
     struct Transaction {
@@ -181,11 +179,6 @@ contract ReachToken is
     event ConfirmTransaction(address indexed owner, uint256 indexed txIndex);
     event RevokeConfirmation(address indexed owner, uint256 indexed txIndex);
     event ExecuteTransaction(address indexed owner, uint256 indexed txIndex);
-
-    modifier onlyOwner() {
-        require(isOwner[msg.sender], "Not owner");
-        _;
-    }
 
     modifier txExists(uint256 _txIndex) {
         require(_txIndex < transactions.length, "Tx does not exist");
