@@ -1,16 +1,15 @@
-const { ethers } = require("hardhat");
+const { ethers, upgrades } = require("hardhat");
 
 async function main() {
-  const [deployer] = await ethers.getSigners();
-  console.log("Deploying contracts with:", deployer.address);
+    const ReachToken = await ethers.getContractFactory("ReachToken");
 
-  const Token = await ethers.getContractFactory("ReachToken");
-  const token = await Token.deploy("Reach Token", "9D-RC", 18, "1000000000000000000000");
+    // Deploy using a proxy
+    const reachToken = await upgrades.deployProxy(ReachToken, [], { initializer: "initialize" });
 
-  console.log("Contract deployed at:", token.address);
+    console.log("ReachToken deployed to:", await reachToken.getAddress());
 }
 
 main().catch((error) => {
-  console.error(error);
-  process.exit(1);
+    console.error(error);
+    process.exitCode = 1;
 });
