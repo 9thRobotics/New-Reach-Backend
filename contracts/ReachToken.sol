@@ -30,6 +30,21 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
     event TokensLockedInReserve(uint256 amountLocked);
     event TreasuryFunded(uint256 amount);
 
+    // Governance variables
+    struct Proposal {
+        string description;
+        uint256 voteCount;
+        bool executed;
+    }
+    
+    Proposal[] public proposals;
+    mapping(address => uint256) public votingPower;
+    mapping(address => bool) public hasVoted;
+
+    event ProposalCreated(uint256 proposalId, string description);
+    event Voted(address indexed voter, uint256 proposalId);
+    event ProposalExecuted(uint256 proposalId);
+
     function initialize() public initializer {
         __ERC20_init(NAME, SYMBOL);
         __Ownable_init();
@@ -107,5 +122,34 @@ contract ReachToken is ERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgr
 
     function aiDataLogging() external onlyOwner {
         // Placeholder for AI & robotics on-chain logging
+    }
+
+    // Governance functions
+    function createProposal(string memory description) external onlyOwner {
+        proposals.push(Proposal({ description: description, voteCount: 0, executed: false }));
+        emit ProposalCreated(proposals.length - 1, description);
+    }
+
+    function vote(uint256 proposalId) external {
+        require(!hasVoted[msg.sender], "Already voted");
+        require(proposalId < proposals.length, "Invalid proposal");
+
+        Proposal storage proposal = proposals[proposalId];
+        proposal.voteCount += votingPower[msg.sender];
+        hasVoted[msg.sender] = true;
+
+        emit Voted(msg.sender, proposalId);
+    }
+
+    function executeProposal(uint256 proposalId) external onlyOwner {
+        require(proposalId < proposals.length, "Invalid proposal");
+        
+        Proposal storage proposal = proposals[proposalId];
+        require(!proposal.executed, "Proposal already executed");
+
+        proposal.executed = true;
+        // Add your proposal execution logic here
+
+        emit ProposalExecuted(proposalId);
     }
 }
