@@ -1,15 +1,18 @@
 const { ethers, upgrades } = require("hardhat");
 
 async function main() {
-    const ReachToken = await ethers.getContractFactory("ReachToken");
+  const ReachToken = await ethers.getContractFactory("ReachToken");
+  console.log("Deploying ReachToken with proxy...");
 
-    // Deploy using a proxy
-    const reachToken = await upgrades.deployProxy(ReachToken, [], { initializer: "initialize" });
+  const proxy = await upgrades.deployProxy(ReachToken, { kind: "uups" });
+  await proxy.deployed();
 
-    console.log("ReachToken deployed to:", await reachToken.getAddress());
+  console.log(`Proxy deployed at: ${proxy.address}`);
 }
 
-main().catch((error) => {
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
     console.error(error);
-    process.exitCode = 1;
-});
+    process.exit(1);
+  });
