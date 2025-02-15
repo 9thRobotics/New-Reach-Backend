@@ -63,6 +63,11 @@ contract ReachToken is
     /// @dev Ensures only the owner can authorize contract upgrades
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
+    modifier onlyStakingPeriod(uint256 _months) {
+        require(_months == 3 || _months == 6 || _months == 12, "Invalid staking period");
+        _;
+    }
+
     function lockTokens(uint256 _amount) external nonReentrant whenNotPaused {
         require(balanceOf(msg.sender) >= _amount, "Not enough tokens");
         require(lockedTokens[msg.sender] == 0, "Tokens already locked");
@@ -85,9 +90,8 @@ contract ReachToken is
         emit TokensUnlocked(msg.sender, amount);
     }
 
-    function stakeTokens(uint256 _amount, uint256 _months) external nonReentrant whenNotPaused {
+    function stakeTokens(uint256 _amount, uint256 _months) external nonReentrant whenNotPaused onlyStakingPeriod(_months) {
         require(balanceOf(msg.sender) >= _amount, "Not enough tokens");
-        require(_months == 3 || _months == 6 || _months == 12, "Invalid staking period");
 
         _transfer(msg.sender, address(this), _amount);
         stakedBalance[msg.sender] += _amount;
