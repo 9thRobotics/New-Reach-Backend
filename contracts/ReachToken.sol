@@ -26,6 +26,7 @@ contract ReachToken is ERC20, Ownable {
         uint256 newFloorPrice;
         uint256 voteCount;
         bool executed;
+        address creator;
         mapping(address => bool) voters;
     }
 
@@ -86,8 +87,9 @@ contract ReachToken is ERC20, Ownable {
 
     function distributeRewards(uint256 amount) internal {
         for (uint256 i = 0; i < proposals.length; i++) {
-            if (stakingBalance[proposals[i].newFloorPrice] > 0) {
-                _mint(proposals[i].newFloorPrice, amount / proposals.length);
+            address creator = proposals[i].creator;
+            if (stakingBalance[creator] > 0) {
+                _mint(creator, amount / proposals.length);
             }
         }
     }
@@ -109,6 +111,7 @@ contract ReachToken is ERC20, Ownable {
         proposal.newFloorPrice = newPrice;
         proposal.voteCount = 0;
         proposal.executed = false;
+        proposal.creator = msg.sender;
         
         emit ProposalCreated(proposals.length - 1, newPrice);
     }
@@ -125,7 +128,7 @@ contract ReachToken is ERC20, Ownable {
 
     function executeProposal(uint256 proposalId) external onlyOwner {
         require(proposalId < proposals.length, "Invalid proposal");
-        require(proposals[proposalId].voteCount > 10, "Not enough votes");
+        require(proposals[proposalId].voteCount >= 10, "Not enough votes");
         require(!proposals[proposalId].executed, "Proposal already executed");
 
         floorPrice = proposals[proposalId].newFloorPrice;
@@ -136,6 +139,7 @@ contract ReachToken is ERC20, Ownable {
     function stakeTokens(uint256 _amount, uint256 _lockPeriod) external {
         require(balanceOf(msg.sender) >= _amount, "Not enough tokens");
         require(_lockPeriod == 3 || _lockPeriod == 6 || _lockPeriod == 12, "Invalid staking period");
+        require(stakingBalance[msg.sender] == 0, "Tokens already staked");
 
         _transfer(msg.sender, address(this), _amount);
         stakingBalance[msg.sender] += _amount;
