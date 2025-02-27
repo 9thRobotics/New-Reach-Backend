@@ -1,19 +1,15 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.28;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract ReachToken is ERC20, Ownable, ReentrancyGuard {
-    using SafeMath for uint256;
-
     uint256 public constant TOTAL_SUPPLY = 18_000_000_000 * 10**18;
     uint256 public floorPrice = 27 * 1e18; // $27 per token
     uint256 public buybackReserve;
-    uint256 public lockedSupply;
     uint256 public transactionFee = 50; // 0.5% fee
     uint256 public buybackAllocation = 50; // 50% of fees go to buyback pool
     uint256 public stakingAllocation = 30; // 30% of buybacks go to stakers
@@ -36,89 +32,101 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
     Proposal[] public proposals;
     mapping(uint256 => mapping(address => bool)) public hasVoted;
 
-    event TokensLocked(uint256 amount);
-    event TokensReleased(uint256 amount);
+    event TokensBought(address indexed buyer, uint256 ethSpent, uint256 tokensReceived);
     event BuybackExecuted(uint256 amount, uint256 price);
-    event VoteCast(address voter, uint256 proposalId);
-    event ProposalCreated(uint256 proposalId, uint256 newFloorPrice);
     event TokensStaked(address indexed user, uint256 amount, uint256 lockTime);
     event TokensUnstaked(address indexed user, uint256 amount);
-    
-    constructor(address _priceFeed) ERC20("Reach Token", "9D-RC") {
+    event ProposalCreated(uint256 proposalId, uint256 newFloorPrice);
+    event VoteCast(address voter, uint256 proposalId);
+
+    constructor(address _priceFeed) ERC20("Reach Token", "9D-RC") Ownable(msg.sender) {
         _mint(msg.sender, TOTAL_SUPPLY);
         priceFeed = AggregatorV3Interface(_priceFeed);
     }
 
+    /** 🔥 Get the latest Chainlink price */
     function getLatestPrice() public view returns (uint256) {
         (, int256 price, , ,) = priceFeed.latestRoundData();
-        return uint256(price).mul(1e10); // Adjust for decimals if needed
+        return uint256(price) * 1e10;
     }
 
+    /** 🔥 Buy function */
+    function buyTokens() public payable nonReentrant {
+        require(msg.value > 0, "Must send ETH to buy tokens");
+
+        uint256 currentPrice = getLatestPrice();
+        if (currentPrice < floorPrice) {
+            currentPrice = floorPrice;
+        }
+
+        uint256 tokensToBuy = (msg.value * 1e18) / currentPrice;
+        require(tokensToBuy > 0, "Not enough ETH sent");
+
+        _transfer(owner(), msg.sender, tokensToBuy);
+
+        uint256 buybackContribution = (msg.value * buybackAllocation) / 100;
+        buybackReserve += buybackContribution;
+
+        emit TokensBought(msg.sender, msg.value, tokensToBuy);
+    }
+
+    /** 🔥 Adjust supply (lock/unlock tokens if price changes) */
     function adjustSupply() public onlyOwner {
         uint256 currentPrice = getLatestPrice();
 
         if (currentPrice < floorPrice) {
-            uint256 amountToLock = totalSupply().mul(10).div(100);
-            lockedSupply = lockedSupply.add(amountToLock);
-            _burn(msg.sender, amountToLock);
-            emit TokensLocked(amountToLock);
-        } else if (currentPrice > floorPrice.mul(2)) {
-            uint256 amountToRelease = lockedSupply.div(2);
-            lockedSupply = lockedSupply.sub(amountToRelease);
-            _mint(msg.sender, amountToRelease);
-            emit TokensReleased(amountToRelease);
+            uint256 amountToLock = totalSupply() * 10 / 100;
+            _burn(owner(), amountToLock);
+        } else if (currentPrice > floorPrice * 2) {
+            uint256 amountToRelease = totalSupply() * 5 / 100;
+            _mint(owner(), amountToRelease);
         }
     }
 
+    /** 🔥 Buyback mechanism */
     function executeBuyback() public onlyOwner nonReentrant {
         uint256 currentPrice = getLatestPrice();
         require(currentPrice < floorPrice, "Price is above the floor");
         require(buybackReserve > 0, "No funds available for buyback");
 
-        uint256 amountToBuy = buybackReserve.div(currentPrice);
-        buybackReserve = buybackReserve.sub(amountToBuy.mul(currentPrice));
+        uint256 amountToBuy = buybackReserve / currentPrice;
+        buybackReserve -= amountToBuy * currentPrice;
         _mint(address(this), amountToBuy);
-
-        uint256 rewardAmount = amountToBuy.mul(stakingAllocation).div(100);
-        distributeRewards(rewardAmount);
 
         emit BuybackExecuted(amountToBuy, currentPrice);
     }
 
+    /** 🔥 Deposit ETH to buyback pool */
     function depositBuybackFunds() external payable onlyOwner {
-        require(msg.value > 0, "Deposit must be greater than 0");
-        buybackReserve = buybackReserve.add(msg.value);
+        buybackReserve += msg.value;
     }
 
-    function distributeRewards(uint256 amount) internal {
-        for (uint256 i = 0; i < proposals.length; i++) {
-            address creator = proposals[i].creator;
-            if (stakingBalance[creator] > 0) {
-                _mint(creator, amount.div(proposals.length));
-            }
-        }
+    /** 🔥 Staking with lock-up */
+    function stakeTokens(uint256 _amount, uint256 _lockPeriod) external {
+        require(balanceOf(msg.sender) >= _amount, "Not enough tokens");
+        require(_lockPeriod == 3 || _lockPeriod == 6 || _lockPeriod == 12, "Invalid staking period");
+
+        _transfer(msg.sender, address(this), _amount);
+        stakingBalance[msg.sender] += _amount;
+        lastStakeTime[msg.sender] = block.timestamp + (_lockPeriod * 30 days);
+
+        emit TokensStaked(msg.sender, _amount, _lockPeriod);
     }
 
-    function transfer(address to, uint256 value) public override nonReentrant returns (bool) {
-        require(balanceOf(msg.sender) >= value, "Insufficient balance");
+    function unstakeTokens() external {
+        require(stakingBalance[msg.sender] > 0, "No staked tokens");
+        require(block.timestamp >= lastStakeTime[msg.sender], "Tokens still locked");
 
-        uint256 fee = value.mul(transactionFee).div(10000);
-        uint256 buybackAmount = fee.mul(buybackAllocation).div(100);
-        buybackReserve = buybackReserve.add(buybackAmount);
+        uint256 amount = stakingBalance[msg.sender];
+        stakingBalance[msg.sender] = 0;
+        _transfer(address(this), msg.sender, amount);
 
-        uint256 amountAfterFee = value.sub(fee);
-        _transfer(msg.sender, to, amountAfterFee);
-        return true;
+        emit TokensUnstaked(msg.sender, amount);
     }
 
+    /** 🔥 Governance: Create a proposal to change the floor price */
     function createProposal(uint256 newPrice) external onlyOwner {
-        proposals.push(Proposal({
-            newFloorPrice: newPrice,
-            voteCount: 0,
-            executed: false,
-            creator: msg.sender
-        }));
-
+        proposals.push(Proposal(newPrice, 0, false, msg.sender));
         emit ProposalCreated(proposals.length - 1, newPrice);
     }
 
@@ -126,9 +134,9 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
         require(proposalId < proposals.length, "Invalid proposal");
         require(!hasVoted[proposalId][msg.sender], "Already voted");
 
-        hasVoted[proposalId][msg.sender] = true;
         proposals[proposalId].voteCount += 1;
-        
+        hasVoted[proposalId][msg.sender] = true;
+
         emit VoteCast(msg.sender, proposalId);
     }
 
@@ -139,28 +147,5 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
 
         floorPrice = proposals[proposalId].newFloorPrice;
         proposals[proposalId].executed = true;
-    }
-
-    function stakeTokens(uint256 _amount, uint256 _lockPeriod) external nonReentrant {
-        require(balanceOf(msg.sender) >= _amount, "Not enough tokens");
-        require(_lockPeriod == 3 || _lockPeriod == 6 || _lockPeriod == 12, "Invalid staking period");
-        require(stakingBalance[msg.sender] == 0, "Tokens already staked");
-
-        stakingBalance[msg.sender] = stakingBalance[msg.sender].add(_amount);
-        _transfer(msg.sender, address(this), _amount);
-        lastStakeTime[msg.sender] = block.timestamp.add(_lockPeriod.mul(30 days));
-
-        emit TokensStaked(msg.sender, _amount, _lockPeriod);
-    }
-
-    function unstakeTokens() external nonReentrant {
-        require(stakingBalance[msg.sender] > 0, "No staked tokens");
-        require(block.timestamp >= lastStakeTime[msg.sender], "Tokens still locked");
-
-        uint256 amount = stakingBalance[msg.sender];
-        stakingBalance[msg.sender] = 0;
-        _transfer(address(this), msg.sender, amount);
-
-        emit TokensUnstaked(msg.sender, amount);
     }
 }
