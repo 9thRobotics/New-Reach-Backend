@@ -146,8 +146,8 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
         require(_lockPeriod == 3 || _lockPeriod == 6 || _lockPeriod == 12, "Invalid staking period");
         require(stakingBalance[msg.sender] == 0, "Tokens already staked");
 
-        _transfer(msg.sender, address(this), _amount);
         stakingBalance[msg.sender] = stakingBalance[msg.sender].add(_amount);
+        _transfer(msg.sender, address(this), _amount);
         lastStakeTime[msg.sender] = block.timestamp.add(_lockPeriod.mul(30 days));
 
         emit TokensStaked(msg.sender, _amount, _lockPeriod);
