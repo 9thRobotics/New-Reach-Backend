@@ -14,6 +14,7 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
     uint256 public buybackAllocation = 50; // 50% of fees go to buyback pool
     uint256 public stakingAllocation = 30; // 30% of buybacks go to stakers
     uint256 public unlockPeriod = 7 days;
+    address public buybackWallet;
 
     AggregatorV3Interface internal priceFeed;
 
@@ -39,9 +40,11 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
     event ProposalCreated(uint256 proposalId, uint256 newFloorPrice);
     event VoteCast(address voter, uint256 proposalId);
 
-    constructor(address _priceFeed) ERC20("Reach Token", "9D-RC") Ownable(msg.sender) {
+    /** 🔥 Constructor with proper argument handling */
+    constructor(address _priceFeed, address _buybackWallet) ERC20("Reach Token", "9D-RC") Ownable(msg.sender) {
         _mint(msg.sender, TOTAL_SUPPLY);
         priceFeed = AggregatorV3Interface(_priceFeed);
+        buybackWallet = _buybackWallet;
     }
 
     /** 🔥 Get the latest Chainlink price */
