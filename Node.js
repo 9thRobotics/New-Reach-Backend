@@ -1,9 +1,12 @@
-
 const mongoose = require('mongoose');
 
-// Replace `process.env.MONGO_URI` with your connection string if you're not using environment variables
-const mongoURI = process.env.MONGO_URI;
+// Your MongoDB Atlas connection string
+const mongoURI = "mongodb+srv://phillipdfilkins:5ns7Vy51BbfMcgJY@cluster0.yt6an.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-mongoose.connect(mongoURI, {})
-  .then(() => console.log('MongoDB connected successfully!'))
-  .catch((err) => console.error('Error connecting to MongoDB:', err));
+// Connect to MongoDB
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .then(() => console.log('✅ MongoDB connected successfully!'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err.message));
