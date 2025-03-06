@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
-const uri = 'mongodb+srv://phillipdfilkins:securePass123@cluster0.yt6an.mongodb.net/reach_database?retryWrites=true&w=majority';
+const mongoURI = "mongodb+srv://<username>:<password>@cluster0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB!'))
-  .catch(err => console.error('Connection error:', err));
+// Replace <username> and <password> with your actual credentials
+mongoose.connect(mongoURI, {})
+  .then(() => console.log('✅ MongoDB connected successfully!'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err.message));
