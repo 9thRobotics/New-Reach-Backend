@@ -1,7 +1,11 @@
 name: Deploy Smart Contract
 
 on:
+<<<<<<< HEAD
   workflow_dispatch:  # <-- Allows manual trigger from GitHub Actions
+=======
+  workflow_dispatch:  # Allows manual trigger from GitHub Actions
+>>>>>>> 5c1416e (Add deploy workflow)
 
 jobs:
   deploy:
