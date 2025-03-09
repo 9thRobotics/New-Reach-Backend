@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
-
-// Your MongoDB Atlas connection string
-const mongoURI = "mongodb+srv://phillipdfilkins:5ns7Vy51BbfMcgJY@cluster0.yt6an.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-// Connect to MongoDB
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-  .then(() => console.log('✅ MongoDB connected successfully!'))
-  .catch((err) => console.error('❌ MongoDB connection error:', err.message));
+require('dotenv').config(); // Load environment variables
+const mongoURI = process.env.MONGO_URI;
+const connectDB = async () => {
+  try {
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('✅ MongoDB connected successfully!');
+  } catch (err) {
+    console.error('❌ MongoDB connection error:', err.message);
+    process.exit(1); // Exit the app if MongoDB connection fails
+  }
+};
+module.exports = connectDB;
