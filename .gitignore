@@ -1,7 +1,8 @@
-
-<<<<<<< HEAD
 .env
 
+[submodule "new-reach-backend"]
+    path = new-reach-backend
+    url = <URL-to-your-submodule>
 
 .vercel
 
@@ -123,8 +124,7 @@ vmlogs/
 *.regtrans-ms
 *.blf
 
->>>>>>> eb11c372f89f6a127163107d2b510f768d2d54de
-=======
+
 node_modules
 .env
 
@@ -143,4 +143,3 @@ node_modules
 # Hardhat Ignition default folder for deployments against a local node
 ignition/deployments/chain-31337
 .env
->>>>>>> cd2c430d012f4ac266d0a0ad29296efdf9e9a87e
