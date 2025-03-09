@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -35,7 +34,6 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-=======
 // MongoDB Schema for Sales
 const SaleSchema = new mongoose.Schema({
   walletAddress: String,
@@ -70,5 +68,5 @@ app.post('/api/sell-tokens', async (req, res) => {
     console.error('Error processing token sale:', error);
     res.status(500).send('Error processing token sale');
   }
->>>>>>> cd2c430d012f4ac266d0a0ad29296efdf9e9a87e
+
 });
