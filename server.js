@@ -6,7 +6,6 @@ const dotenv = require('dotenv');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { celebrate, errors } = require('celebrate');
-const tokensRoute = require('./tokens');
 const url = require('url');
 
 const app = express();
@@ -23,7 +22,8 @@ app.set('trust proxy', 1);
 app.get('/', (req, res) => {
   res.send('9th Dimension Robotics Company');
 });
-app.use('/api/tokens', tokensRoute);
+app.use('/api/tokens', require('./api/tokens')); // Correct route
+
 const proxyUrl = process.env.QUOTAGUARDSTATIC_URL;
 const mongoURI = process.env.MONGO_URI;
 const proxyDetails = new url.URL(proxyUrl);
