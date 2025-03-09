@@ -1,7 +1,8 @@
 // Import required libraries
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
+const connectDB = require('../../config/db');
+connectDB(); // Call this at the start of your file
 
 // Example Token Schema (adjust as needed)
 const tokenSchema = new mongoose.Schema({
