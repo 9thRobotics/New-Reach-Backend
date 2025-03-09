@@ -1,46 +1,50 @@
 const express = require('express');
 const router = express.Router();
-
-// In-memory data for demonstration (replace with database integration as needed)
-let tokensData = {
-  availableTokens: 1000000,
-};
+const Token = require('../models/Token');
 
 // GET /api/tokens
-// Endpoint to retrieve token-related information
-router.get('/', (req, res) => {
-  res.status(200).json({
-    message: 'Tokens endpoint is working!',
-    availableTokens: tokensData.availableTokens,
-  });
+router.get('/', async (req, res) => {
+  try {
+    const token = await Token.findOne();
+    if (!token) {
+      return res.status(404).json({ error: 'Token data not found.' });
+    }
+    res.status(200).json({
+      message: 'Tokens endpoint is working!',
+      availableTokens: token.availableTokens,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // POST /api/tokens/purchase
-// Endpoint to handle token purchase requests
-router.post('/purchase', (req, res) => {
+router.post('/purchase', async (req, res) => {
   const { amount } = req.body;
-
-  // Validate the purchase amount
   if (!amount || typeof amount !== 'number' || amount <= 0) {
-    return res.status(400).json({
-      error: 'Invalid amount. Please provide a valid number greater than 0.',
-    });
+    return res.status(400).json({ error: 'Invalid amount.' });
   }
 
-  // Check if enough tokens are available
-  if (amount > tokensData.availableTokens) {
-    return res.status(400).json({
-      error: 'Not enough tokens available for purchase.',
+  try {
+    let token = await Token.findOne();
+    if (!token) {
+      return res.status(404).json({ error: 'Token data not found.' });
+    }
+
+    if (amount > token.availableTokens) {
+      return res.status(400).json({ error: 'Not enough tokens available.' });
+    }
+
+    token.availableTokens -= amount;
+    await token.save();
+
+    res.status(200).json({
+      message: `Successfully purchased ${amount} tokens.`,
+      remainingTokens: token.availableTokens,
     });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
-
-  // Deduct the purchased amount from available tokens
-  tokensData.availableTokens -= amount;
-
-  res.status(200).json({
-    message: `Successfully purchased ${amount} tokens.`,
-    remainingTokens: tokensData.availableTokens,
-  });
 });
 
 module.exports = router;
