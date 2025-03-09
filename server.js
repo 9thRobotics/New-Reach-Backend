@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const connectDB = require('./config/db'); // Import the DB connection
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -8,7 +8,9 @@ const rateLimit = require('express-rate-limit');
 const { celebrate, errors } = require('celebrate');
 const tokensRoute = require('./tokens');
 const url = require('url');
+
 const app = express();
+
 dotenv.config();
 app.use(cors());
 app.use(bodyParser.json());
@@ -37,34 +39,10 @@ const options = {
 };
 
 // Connect to MongoDB
-mongoose
-  .connect(mongoURI, {
-    ...options
-  })
-  .then(() => {
-    console.log('MongoDB connected successfully via QuotaGuard Static!');
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error:', err);
-  });
+connectDB();
+
 app.use(errors());
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
-require('dotenv').config();
-const mongoose = require('mongoose'); // Add this line
-const app = express();
-const port = 3000;
-const infuraUrl = process.env.INFURA_URL;
-const mongoURI = process.env.MONGO_URI; // Add this line
-mongoose
-  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ MongoDB Connected Successfully"))
-  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
-app.get('/', (req, res) => {
-  res.send(`Connected to Infura at ${infuraUrl}`);
-});
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
 });
