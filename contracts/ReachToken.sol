@@ -41,19 +41,17 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
     event ProposalCreated(uint256 proposalId, uint256 newFloorPrice);
     event VoteCast(address voter, uint256 proposalId);
 
-    /** 🔥 Constructor with Proper Validation */
-    constructor(address _priceFeed, address _buybackWallet) 
-        ERC20("Reach Token", "9D-RC") 
-        Ownable(msg.sender) 
-        ReentrancyGuard()
-    {
-        require(_priceFeed != address(0), "Invalid price feed address");
-        require(_buybackWallet != address(0), "Invalid buyback wallet");
+  constructor(address _priceFeed, address _buybackWallet) 
+    ERC20("Reach Token", "9D-RC")
+{
+    require(_priceFeed != address(0), "Invalid price feed address");
+    require(_buybackWallet != address(0), "Invalid buyback wallet");
 
-        _mint(msg.sender, TOTAL_SUPPLY);
-        priceFeed = AggregatorV3Interface(_priceFeed);
-        buybackWallet = _buybackWallet;
-    }
+    _mint(msg.sender, TOTAL_SUPPLY);
+
+    priceFeed = AggregatorV3Interface(_priceFeed);
+    buybackWallet = _buybackWallet;
+}
 
     /** 🔥 Get the latest Chainlink price */
     function getLatestPrice() public view returns (uint256) {
