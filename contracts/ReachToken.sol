@@ -6,7 +6,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@chainlink/contracts/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-
 contract ReachToken is ERC20, Ownable, ReentrancyGuard {
     uint256 public constant TOTAL_SUPPLY = 18_000_000_000 * 10**18;
     uint256 public floorPrice = 27 * 1e18; // $27 per token
@@ -41,17 +40,17 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
     event ProposalCreated(uint256 proposalId, uint256 newFloorPrice);
     event VoteCast(address voter, uint256 proposalId);
 
-  constructor(address _priceFeed, address _buybackWallet) 
-    ERC20("Reach Token", "9D-RC")
-{
-    require(_priceFeed != address(0), "Invalid price feed address");
-    require(_buybackWallet != address(0), "Invalid buyback wallet");
+    constructor(address _priceFeed, address _buybackWallet) 
+        ERC20("Reach Token", "9D-RC")
+    {
+        require(_priceFeed != address(0), "Invalid price feed address");
+        require(_buybackWallet != address(0), "Invalid buyback wallet");
 
-    _mint(msg.sender, TOTAL_SUPPLY);
+        _mint(msg.sender, TOTAL_SUPPLY);
 
-    priceFeed = AggregatorV3Interface(_priceFeed);
-    buybackWallet = _buybackWallet;
-}
+        priceFeed = AggregatorV3Interface(_priceFeed);
+        buybackWallet = _buybackWallet;
+    }
 
     /** 🔥 Get the latest Chainlink price */
     function getLatestPrice() public view returns (uint256) {
