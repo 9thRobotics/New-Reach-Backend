@@ -1,27 +1,128 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@chainlink/contracts/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+abstract contract ERC20 {
+    string public name;
+    string public symbol;
+    uint8 public decimals = 18;
+    uint256 public totalSupply;
 
-contract ReachToken is ERC20, Ownable, ReentrancyGuard {
-    uint256 public constant TOTAL_SUPPLY = 18_000_000_000 * 10**18;
-    uint256 public floorPrice = 27 * 1e18; // $27 per token
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    event Approval(address indexed owner, address indexed spender, uint256 value);
+
+    constructor(string memory _name, string memory _symbol) {
+        name = _name;
+        symbol = _symbol;
+    }
+
+    function transfer(address to, uint256 value) public returns (bool) {
+        require(balanceOf[msg.sender] >= value, "ERC20: transfer amount exceeds balance");
+        balanceOf[msg.sender] -= value;
+        balanceOf[to] += value;
+        emit Transfer(msg.sender, to, value);
+        return true;
+    }
+
+    function approve(address spender, uint256 value) public returns (bool) {
+        allowance[msg.sender][spender] = value;
+        emit Approval(msg.sender, spender, value);
+        return true;
+    }
+
+    function transferFrom(address from, address to, uint256 value) public returns (bool) {
+        require(balanceOf[from] >= value, "ERC20: transfer amount exceeds balance");
+        require(allowance[from][msg.sender] >= value, "ERC20: transfer amount exceeds allowance");
+        allowance[from][msg.sender] -= value;
+        balanceOf[from] -= value;
+        balanceOf[to] += value;
+        emit Transfer(from, to, value);
+        return true;
+    }
+
+    function _mint(address to, uint256 value) internal {
+        totalSupply += value;
+        balanceOf[to] += value;
+        emit Transfer(address(0), to, value);
+    }
+
+    function _burn(address from, uint256 value) internal {
+        require(balanceOf[from] >= value, "ERC20: burn amount exceeds balance");
+        balanceOf[from] -= value;
+        totalSupply -= value;
+        emit Transfer(from, address(0), value);
+    }
+
+    function _transfer(address from, address to, uint256 value) internal {
+        require(balanceOf[from] >= value, "ERC20: transfer amount exceeds balance");
+        balanceOf[from] -= value;
+        balanceOf[to] += value;
+        emit Transfer(from, to, value);
+    }
+}
+
+/** @dev Ownable Logic **/
+abstract contract Ownable {
+    address public owner;
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+    constructor() {
+        owner = msg.sender;
+        emit OwnershipTransferred(address(0), msg.sender);
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Ownable: caller is not the owner");
+        _;
+    }
+
+    function transferOwnership(address newOwner) public onlyOwner {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(owner, newOwner);
+        owner = newOwner;
+    }
+}
+
+/** @dev Reentrancy Protection **/
+abstract contract ReentrancyGuard {
+    uint256 private _status;
+    constructor() {
+        _status = 1;
+    }
+    modifier nonReentrant() {
+        require(_status != 2, "ReentrancyGuard: reentrant call");
+        _status = 2;
+        _;
+        _status = 1;
+    }
+}
+
+/** @dev Chainlink Aggregator Interface **/
+interface AggregatorV3Interface {
+    function latestRoundData() external view returns (
+        uint80 roundId,
+        int256 answer,
+        uint256 startedAt,
+        uint256 updatedAt,
+        uint80 answeredInRound
+    );
+}
+
+/** @title ReachToken - The 9D-RC Token **/
+contract ReachToken is ERC20("Reach Token", "9D-RC"), Ownable, ReentrancyGuard {
+    uint256 public constant TOTAL_SUPPLY = 18_000_000_000 * 1e18;
+    uint256 public floorPrice = 27 * 1e18;
     uint256 public buybackReserve;
-    uint256 public transactionFee = 50; // 0.5% fee
-    uint256 public buybackAllocation = 50; // 50% of fees go to buyback pool
-    uint256 public stakingAllocation = 30; // 30% of buybacks go to stakers
-    uint256 public unlockPeriod = 7 days;
+    uint256 public buybackAllocation = 50;
+    uint256 public stakingAllocation = 30;
     address public buybackWallet;
 
-    AggregatorV3Interface internal priceFeed;
+    AggregatorV3Interface public priceFeed;
 
     mapping(address => uint256) public stakingBalance;
     mapping(address => uint256) public lastStakeTime;
-    mapping(address => uint256) public lockedTokens;
-    mapping(address => uint256) public unlockTimestamp;
 
     struct Proposal {
         uint256 newFloorPrice;
@@ -35,105 +136,69 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
 
     event TokensBought(address indexed buyer, uint256 ethSpent, uint256 tokensReceived);
     event BuybackExecuted(uint256 amount, uint256 price);
-    event TokensStaked(address indexed user, uint256 amount, uint256 lockTime);
+    event TokensStaked(address indexed user, uint256 amount);
     event TokensUnstaked(address indexed user, uint256 amount);
     event ProposalCreated(uint256 proposalId, uint256 newFloorPrice);
     event VoteCast(address voter, uint256 proposalId);
 
-    constructor(address _priceFeed, address _buybackWallet) 
-        ERC20("Reach Token", "9D-RC")
-    {
-        require(_priceFeed != address(0), "Invalid price feed address");
-        require(_buybackWallet != address(0), "Invalid buyback wallet");
-
-        _mint(msg.sender, TOTAL_SUPPLY);
+    constructor(address _priceFeed, address _buybackWallet) {
+        require(_priceFeed != address(0), "Invalid price feed");
+        require(_buybackWallet != address(0), "Invalid wallet");
 
         priceFeed = AggregatorV3Interface(_priceFeed);
         buybackWallet = _buybackWallet;
+
+        _mint(msg.sender, TOTAL_SUPPLY);
     }
 
-    /** 🔥 Get the latest Chainlink price */
     function getLatestPrice() public view returns (uint256) {
         (, int256 price, , ,) = priceFeed.latestRoundData();
         return uint256(price) * 1e10;
     }
 
-    /** 🔥 Buy function */
     function buyTokens() public payable nonReentrant {
-        require(msg.value > 0, "Must send ETH to buy tokens");
+        require(msg.value > 0, "No ETH sent");
 
         uint256 currentPrice = getLatestPrice();
-        if (currentPrice < floorPrice) {
-            currentPrice = floorPrice;
-        }
+        if (currentPrice < floorPrice) currentPrice = floorPrice;
 
         uint256 tokensToBuy = (msg.value * 1e18) / currentPrice;
-        require(tokensToBuy > 0, "Not enough ETH sent");
+        _transfer(owner, msg.sender, tokensToBuy);
 
-        _transfer(owner(), msg.sender, tokensToBuy);
-
-        uint256 buybackContribution = (msg.value * buybackAllocation) / 100;
-        buybackReserve += buybackContribution;
+        uint256 contribution = (msg.value * buybackAllocation) / 100;
+        buybackReserve += contribution;
 
         emit TokensBought(msg.sender, msg.value, tokensToBuy);
     }
 
-    /** 🔥 Adjust supply (lock/unlock tokens if price changes) */
-    function adjustSupply() public onlyOwner {
-        uint256 currentPrice = getLatestPrice();
-
-        if (currentPrice < floorPrice) {
-            uint256 amountToLock = totalSupply() * 10 / 100;
-            _burn(owner(), amountToLock);
-        } else if (currentPrice > floorPrice * 2) {
-            uint256 amountToRelease = totalSupply() * 5 / 100;
-            _mint(owner(), amountToRelease);
-        }
-    }
-
-    /** 🔥 Buyback mechanism with Proper Validation */
     function executeBuyback() public onlyOwner nonReentrant {
         uint256 currentPrice = getLatestPrice();
-        require(currentPrice < floorPrice, "Price is above the floor");
-        require(buybackReserve > 0, "No funds available for buyback");
+        require(currentPrice < floorPrice, "Price too high");
+        require(buybackReserve > 0, "No reserve");
 
-        uint256 amountToBuy = buybackReserve / currentPrice;
-        buybackReserve -= amountToBuy * currentPrice;
-        _mint(address(this), amountToBuy);
+        uint256 buyAmount = buybackReserve / currentPrice;
+        buybackReserve -= buyAmount * currentPrice;
+        _mint(address(this), buyAmount);
 
-        emit BuybackExecuted(amountToBuy, currentPrice);
+        emit BuybackExecuted(buyAmount, currentPrice);
     }
 
-    /** 🔥 Deposit ETH to buyback pool */
-    function depositBuybackFunds() external payable onlyOwner {
-        require(msg.value > 0, "Deposit must be greater than 0");
-        buybackReserve += msg.value;
-    }
-
-    /** 🔥 Staking with lock-up */
-    function stakeTokens(uint256 _amount, uint256 _lockPeriod) external nonReentrant {
-        require(balanceOf(msg.sender) >= _amount, "Not enough tokens");
-        require(_lockPeriod == 3 || _lockPeriod == 6 || _lockPeriod == 12, "Invalid staking period");
-
-        _transfer(msg.sender, address(this), _amount);
-        stakingBalance[msg.sender] += _amount;
-        lastStakeTime[msg.sender] = block.timestamp + (_lockPeriod * 30 days);
-
-        emit TokensStaked(msg.sender, _amount, _lockPeriod);
+    function stakeTokens(uint256 amount) external nonReentrant {
+        require(balanceOf[msg.sender] >= amount, "Not enough tokens");
+        _transfer(msg.sender, address(this), amount);
+        stakingBalance[msg.sender] += amount;
+        lastStakeTime[msg.sender] = block.timestamp;
+        emit TokensStaked(msg.sender, amount);
     }
 
     function unstakeTokens() external nonReentrant {
-        require(stakingBalance[msg.sender] > 0, "No staked tokens");
-        require(block.timestamp >= lastStakeTime[msg.sender], "Tokens still locked");
-
+        require(stakingBalance[msg.sender] > 0, "Nothing staked");
         uint256 amount = stakingBalance[msg.sender];
         stakingBalance[msg.sender] = 0;
         _transfer(address(this), msg.sender, amount);
-
         emit TokensUnstaked(msg.sender, amount);
     }
 
-    /** 🔥 Governance: Create a proposal to change the floor price */
     function createProposal(uint256 newPrice) external onlyOwner {
         proposals.push(Proposal(newPrice, 0, false, msg.sender));
         emit ProposalCreated(proposals.length - 1, newPrice);
@@ -143,18 +208,18 @@ contract ReachToken is ERC20, Ownable, ReentrancyGuard {
         require(proposalId < proposals.length, "Invalid proposal");
         require(!hasVoted[proposalId][msg.sender], "Already voted");
 
-        proposals[proposalId].voteCount += 1;
+        proposals[proposalId].voteCount++;
         hasVoted[proposalId][msg.sender] = true;
-
         emit VoteCast(msg.sender, proposalId);
     }
 
     function executeProposal(uint256 proposalId) external onlyOwner {
         require(proposalId < proposals.length, "Invalid proposal");
-        require(proposals[proposalId].voteCount >= 10, "Not enough votes");
-        require(!proposals[proposalId].executed, "Proposal already executed");
+        Proposal storage p = proposals[proposalId];
+        require(!p.executed, "Already executed");
+        require(p.voteCount >= 10, "Not enough votes");
 
-        floorPrice = proposals[proposalId].newFloorPrice;
-        proposals[proposalId].executed = true;
+        floorPrice = p.newFloorPrice;
+        p.executed = true;
     }
 }
